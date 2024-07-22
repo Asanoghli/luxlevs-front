@@ -89,7 +89,7 @@ export  default{
         <img class="size-8" src="/ge.png" alt="ქართული">
         <img class="size-8" src="/uk.png" alt="ქართული">
       </div>
-      <span class="toggle-menu" @click="sidebarStore.ToggleSidebar">
+      <span class="self-end mr-3.5" @click="sidebarStore.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
 
