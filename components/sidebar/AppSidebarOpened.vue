@@ -1,8 +1,6 @@
 <script>
-import ChangeLanguageSidebar from "~/components/sidebar/changeLanguageSidebar.vue";
 
 export default {
-  components: {ChangeLanguageSidebar},
   setup() {
     let sidebarState = useAppSidebar();
     return {sidebarState}
@@ -104,7 +102,10 @@ export default {
   <span class="ml-2 text-sm font-medium">{{ $t("admin.sidebar.account") }}</span>
 </a>
 <div class="sidebar-bottom">
-  <change-language-sidebar/>
+  <div class="flex gap-4 w-full mx-3">
+    <img class="size-10" src="/ge.png" alt="ქართული">
+    <img class="size-10" src="/uk.png" alt="ქართული">
+  </div>
   <span class="mr-3" @click="sidebarState.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">

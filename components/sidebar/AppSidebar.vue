@@ -1,10 +1,9 @@
 <script>
-import ChangeLanguageSidebar from "~/components/sidebar/changeLanguageSidebar.vue";
 import AppSidebarClosed from "~/components/sidebar/AppSidebarClosed.vue";
 import AppSidebarOpened from "~/components/sidebar/AppSidebarOpened.vue";
 
 export default {
-  components: {AppSidebarOpened, AppSidebarClosed, ChangeLanguageSidebar},
+  components: {AppSidebarOpened, AppSidebarClosed},
   setup() {
     let sidebarState = useAppSidebar();
     let isSidebarOpen = sidebarState.isSidebarOpen;
