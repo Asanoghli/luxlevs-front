@@ -1,13 +1,11 @@
+import en from '~/localization/en.json'
+import ge from '~/localization/ge.json'
 
 export default defineI18nConfig(() => ({
     legacy: false,
-    locale: 'en',
+    locale: 'ge',
     messages: {
-        en: {
-            welcome: 'Welcome'
-        },
-        fr: {
-            welcome: 'Bienvenue'
-        }
+        en,
+        ge
     }
 }))

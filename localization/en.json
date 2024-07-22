@@ -1,0 +1,14 @@
+{
+  "admin" : {
+    "sidebar": {
+      "main" : "Main",
+      "users": "Users",
+      "roles": "Roles",
+      "settings": "Website Settings",
+      "contact": "Contact Info",
+      "pages" : "Pages",
+      "messages" : "Messages",
+      "account": "Account"
+    }
+  }
+}

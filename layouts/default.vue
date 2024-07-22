@@ -10,9 +10,9 @@ export  default {
 <template>
 <header>
 </header>
-  <main class="flex">
-    <aside class="h-dvh">
-      <AppSidebar  class="w-full"/>
+  <main class="flex flex-col">
+    <aside class="max-h-dvh h-dvh">
+      <h1>Sidebar Here</h1>
     </aside>
     <slot/>
   </main>

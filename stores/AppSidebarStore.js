@@ -1,8 +1,14 @@
-import {defineStore} from '@pinia/nuxt'
-export  const useSidebarStore = defineStore('SidebarStore',{
-    state : ()=>{
-        return {
-          counter : 0
-        };
-    }
+import {defineStore}  from 'pinia'
+export  const useAppSidebar = defineStore('world',{
+state: ()=>{
+   return {
+      isSidebarOpen : true,
+   }
+},
+actions : {
+   ToggleSidebar(){
+      this.isSidebarOpen = !this.isSidebarOpen;
+      console.log('JS : '+this.isSidebarOpen);
+   }
+}
 })
