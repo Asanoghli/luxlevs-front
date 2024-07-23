@@ -2,8 +2,14 @@
 export  default{
   setup(){
     let sidebarStore = useAppSidebar();
+    let {setLocale} = useI18n();
 
-    return {sidebarStore};
+    return {sidebarStore,setLocale};
+  },
+  methods : {
+    ChangeLanguage(lang){
+      this.setLocale(lang);
+    }
   }
 }
 </script>
@@ -91,8 +97,8 @@ export  default{
     </a>
     <div class="sidebar-bottom-hide">
       <div class="flex flex-col gap-4 w-full mx-3 justify-center items-center">
-        <img class="size-8" src="/ge.png" alt="ქართული">
-        <img class="size-8" src="/uk.png" alt="ქართული">
+        <img @click="ChangeLanguage('ge')" class="size-8" src="/ge.png" alt="ქართული">
+        <img @click="ChangeLanguage('en')" class="size-8" src="/uk.png" alt="ქართული">
       </div>
       <span class="self-end mr-3.5" @click="sidebarStore.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
