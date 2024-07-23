@@ -3,12 +3,13 @@
 export default {
   setup() {
     let sidebarState = useAppSidebar();
-    let {setLocale} = useI18n();
+    let {setLocale,locale} = useI18n();
 
-    return {sidebarState,setLocale}
+    return {sidebarState,setLocale,locale}
   },
   methods : {
     ChangeLanguage(lang){
+      if(lang === this.locale) return;
       this.setLocale(lang);
     }
   }
@@ -110,8 +111,20 @@ export default {
 </a>
 <div class="sidebar-bottom">
   <div class="flex gap-4 w-full mx-3">
-    <img @click="ChangeLanguage('ge')" class="size-10" src="/ge.png" alt="ქართული">
-    <img @click="ChangeLanguage('en')" class="size-10" src="/uk.png" alt="ქართული">
+    <img
+        @click="ChangeLanguage('ge')"
+        class="size-10 cursor-pointer"
+        src="/ge.png"
+        alt="ქართული"
+        :class="locale === 'ge'? 'active-language' : null "
+    >
+    <img
+        @click="ChangeLanguage('en')"
+        class="size-10 cursor-pointer"
+        src="/uk.png"
+        alt="ქართული"
+        :class="locale === 'en'? 'active-language' : null "
+    >
   </div>
   <span class="mr-3" @click="sidebarState.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -159,6 +172,9 @@ export default {
   width: 100%;
   height: max-content;
 }
-
+.active-language {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 </style>
