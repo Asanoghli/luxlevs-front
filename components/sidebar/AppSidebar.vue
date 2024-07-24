@@ -26,6 +26,7 @@ export default {
     }
     this.isSidebarOpen = true
     console.log(process.server)
+    console.log(process.server)
 
   }
 }
