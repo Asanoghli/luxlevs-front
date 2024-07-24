@@ -1,5 +1,8 @@
 <script >
+import {SidebarConstants} from "~/constants/SessionConstants.js";
+import ToggleSidebarAndChangeLanguageComponent from "~/components/sidebar/ToggleSidebarAndChangeLanguageComponent.vue";
 export  default{
+  components: {ToggleSidebarAndChangeLanguageComponent},
   setup(){
     let sidebarStore = useAppSidebar();
     let {setLocale,locale} = useI18n();
@@ -11,7 +14,8 @@ export  default{
       if(this.locale === lang) return;
       this.setLocale(lang);
     }
-  }
+  },
+
 }
 </script>
 <template>
@@ -25,7 +29,7 @@ export  default{
     </a>
     <div class="flex flex-col items-center mt-3 border-t border-gray-700">
       <nuxt-link :title="$t('admin.sidebar.main')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin"
-         href="#">
+         >
         <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +37,7 @@ export  default{
         </svg>
       </nuxt-link>
       <nuxt-link :title="$t('admin.sidebar.users')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin/users"
-         href="#">
+         >
         <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
           <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0-4 0m-2 8v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1M15 5a2 2 0 1 0 4 0a2 2 0 0 0-4 0m2 5h2a2 2 0 0 1 2 2v1M5 5a2 2 0 1 0 4 0a2 2 0 0 0-4 0m-2 8v-1a2 2 0 0 1 2-2h2"/>
@@ -96,44 +100,8 @@ export  default{
               d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
     </a>
-    <div class="sidebar-bottom-hide">
-      <div class="flex flex-col gap-4 w-full mx-3 justify-center items-center">
-        <img
-            @click="ChangeLanguage('ge')"
-            class="size-8 cursor-pointer"
-            src="/ge.png"
-            alt="ქართული"
-            :class="locale === 'ge'? 'active-language' : null "
+    <toggle-sidebar-and-change-language-component />
 
-        >
-        <img
-            @click="ChangeLanguage('en')"
-            class="size-8 cursor-pointer"
-            src="/uk.png"
-            alt="ქართული"
-            :class="locale === 'en'? 'active-language' : null "
-
-        >
-      </div>
-      <span class="self-end mr-3.5" @click="sidebarStore.ToggleSidebar">
-            <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
-
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-<g id="SVGRepo_iconCarrier"> <title>arrow_in_left [#ffffff]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g
-    id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview"
-                                                                                   transform="translate(-260.000000, -6479.000000)"
-                                                                                   fill="#ffffff"> <g id="icons"
-                                                                                                      transform="translate(56.000000, 160.000000)"> <path
-    d="M212.271,6328.958 L216.942,6333.906 L218.396,6332.544 L215.968,6330 L224,6330 L224,6328 L215.968,6328 L218.396,6325.408 L216.942,6324.06 L212.271,6328.958 Z M214,6339 L204,6339 L204,6319 L214,6319 L214,6323 L212,6323 L212,6321 L206,6321 L206,6337 L212,6337 L212,6335 L214,6335 L214,6339 Z"
-    id="arrow_in_left-[#ffffff]"> </path> </g> </g> </g> </g>
-
-</svg>
-        </span>
-    </div>
   </div>
 </template>
 <style scoped>

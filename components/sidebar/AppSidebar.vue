@@ -1,6 +1,7 @@
 <script>
 import AppSidebarClosed from "~/components/sidebar/AppSidebarClosed.vue";
 import AppSidebarOpened from "~/components/sidebar/AppSidebarOpened.vue";
+import {SidebarConstants} from "~/constants/SessionConstants.js";
 
 export default {
   components: {AppSidebarOpened, AppSidebarClosed},
@@ -14,6 +15,16 @@ export default {
     ToggleSideBar() {
       this.sidebarState.ToggleSidebar();
       console.log(this.sidebarState.isSidebarOpen);
+    }
+  },
+  beforeMount() {
+    // Is Sidebar Open Or Close
+    let sidebarCookie = useCookie(SidebarConstants.IS_SIDEBAR_OPEN);
+    if (sidebarCookie.value === null || sidebarCookie.value === true) {
+      this.sidebarState.isSidebarOpen = true;
+    } else{
+      this.sidebarState.isSidebarOpen = false
+      sidebarCookie.value = false;
     }
   }
 }
