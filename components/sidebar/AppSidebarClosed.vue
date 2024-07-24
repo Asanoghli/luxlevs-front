@@ -24,7 +24,7 @@ export  default{
       </svg>
     </a>
     <div class="flex flex-col items-center mt-3 border-t border-gray-700">
-      <nuxt-link class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin"
+      <nuxt-link :title="$t('admin.sidebar.main')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin"
          href="#">
         <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">
@@ -32,14 +32,14 @@ export  default{
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
         </svg>
       </nuxt-link>
-      <nuxt-link class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin/users"
+      <nuxt-link :title="$t('admin.sidebar.users')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin/users"
          href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
           <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0-4 0m-2 8v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1M15 5a2 2 0 1 0 4 0a2 2 0 0 0-4 0m2 5h2a2 2 0 0 1 2 2v1M5 5a2 2 0 1 0 4 0a2 2 0 0 0-4 0m-2 8v-1a2 2 0 0 1 2-2h2"/>
         </svg>
       </nuxt-link>
-      <nuxt-link class="flex items-center justify-center w-12 h-12 mt-2 text-gray-200 bg-gray-700 rounded" to="/admin/roles">
+      <nuxt-link :title="$t('admin.sidebar.roles')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin/roles">
         <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
           <g fill="none">
             <path
@@ -49,7 +49,7 @@ export  default{
           </g>
         </svg>
       </nuxt-link>
-      <nuxt-link class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+      <nuxt-link :title="$t('admin.sidebar.settings')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
          to="/admin/settings">
         <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">
@@ -57,7 +57,7 @@ export  default{
                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
         </svg>
       </nuxt-link>
-      <nuxt-link class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+      <nuxt-link :title="$t('admin.sidebar.contact')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
          to="/admin/contact">
         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
           <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -148,7 +148,9 @@ export  default{
 .sidebar-item:hover:not(.active) {
   @apply bg-gray-700 text-gray-300
 }
-
+.active {
+  @apply text-gray-200 bg-gray-700 rounded;
+}
 
 .sidebar-bottom-hide {
   position: absolute;
