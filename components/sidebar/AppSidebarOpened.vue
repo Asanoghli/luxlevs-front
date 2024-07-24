@@ -7,7 +7,7 @@ export default {
   setup() {
     let sidebarState = useAppSidebar();
     let {setLocale,locale} = useI18n();
-
+console.log(sidebarState.isSidebarOpen);
     return {sidebarState,setLocale,locale}
   },
   methods : {

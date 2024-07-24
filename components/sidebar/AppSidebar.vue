@@ -7,25 +7,26 @@ export default {
   components: {AppSidebarOpened, AppSidebarClosed},
   setup() {
     let sidebarState = useAppSidebar();
-    let isSidebarOpen = sidebarState.isSidebarOpen;
+    let {isSidebarOpen} = storeToRefs(sidebarState)
+
     const {locale, setLocale} = useI18n();
-    return {locale, setLocale, isSidebarOpen, sidebarState};
-  },
-  methods: {
-    ToggleSideBar() {
-      this.sidebarState.ToggleSidebar();
-      console.log(this.sidebarState.isSidebarOpen);
-    }
+    sidebarState.isSidebarOpen = false;
+
+    return {locale, setLocale, sidebarState,isSidebarOpen};
   },
   beforeMount() {
     // Is Sidebar Open Or Close
     let sidebarCookie = useCookie(SidebarConstants.IS_SIDEBAR_OPEN);
+
     if (sidebarCookie.value === null || sidebarCookie.value === true) {
-      this.sidebarState.isSidebarOpen = true;
+      this.isSidebarOpen = true;
     } else{
-      this.sidebarState.isSidebarOpen = false
+      this.isSidebarOpen = false
       sidebarCookie.value = false;
     }
+    this.isSidebarOpen = true
+    console.log(process.server)
+
   }
 }
 </script>

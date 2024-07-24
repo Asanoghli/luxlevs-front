@@ -1,8 +1,10 @@
 <script>
-export  default {
+export default {
   setup(){
     const sidebarState = useAppSidebar();
     const {locale,setLocale} = useI18n()
+
+
     return {sidebarState,locale}
   }
 }
