@@ -4,18 +4,6 @@ import ToggleSidebarAndChangeLanguageComponent from "~/components/sidebar/Toggle
 
 export default {
   components: {ToggleSidebarAndChangeLanguageComponent},
-  setup() {
-    let sidebarState = useAppSidebar();
-    let {setLocale,locale} = useI18n();
-    console.log('open : '+sidebarState.isSidebarOpen);
-    return {sidebarState,setLocale,locale}
-  },
-  methods : {
-    ChangeLanguage(lang){
-      if(lang === this.locale) return;
-      this.setLocale(lang);
-    }
-  }
 }
 </script>
 <template>
@@ -120,7 +108,6 @@ export default {
 .active {
   @apply text-gray-200 bg-gray-700 rounded;
 }
-
 .sidebar-item {
   @apply flex items-center w-full h-12 px-3 mt-2 rounded;
 }
@@ -128,21 +115,4 @@ export default {
 .sidebar-item:hover:not(.active) {
   @apply bg-gray-700 text-gray-300
 }
-
-.sidebar-bottom {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  bottom: 5rem;
-  width: 100%;
-  height: max-content;
-}
-
-.active-language {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 </style>

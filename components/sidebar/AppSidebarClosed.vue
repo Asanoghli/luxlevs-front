@@ -5,15 +5,8 @@ export  default{
   components: {ToggleSidebarAndChangeLanguageComponent},
   setup(){
     let sidebarStore = useAppSidebar();
-    let {setLocale,locale} = useI18n();
 
-    return {sidebarStore,setLocale,locale};
-  },
-  methods : {
-    ChangeLanguage(lang){
-      if(this.locale === lang) return;
-      this.setLocale(lang);
-    }
+    return {sidebarStore};
   },
 
 }
@@ -105,10 +98,6 @@ export  default{
   </div>
 </template>
 <style scoped>
-.active {
-  @apply text-gray-200 bg-gray-700 rounded;
-}
-
 .sidebar-item {
   @apply flex items-center w-full h-12 px-3 mt-2 rounded;
 }
@@ -120,19 +109,5 @@ export  default{
   @apply text-gray-200 bg-gray-700 rounded;
 }
 
-.sidebar-bottom-hide {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: space-between;
-  align-items: center;
-  bottom: 5rem;
-  width: 100%;
-  height: max-content;
-}
-.active-language {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+
 </style>

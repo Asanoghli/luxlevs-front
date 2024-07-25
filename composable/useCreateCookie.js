@@ -11,3 +11,14 @@ export const useCreatePersistenceCookie = (cookieKey, cookieValue) => {
 
     newCookie.value = cookieValue;
 }
+export  const useCreateNullValuePersistenceCookieOrGetExisted = (cookieKey)=>{
+    let currentDate = new Date();
+    currentDate.setFullYear(currentDate.getFullYear() + 1)
+
+    let newCookie = useCookie(cookieKey, {
+        expires: currentDate,
+        maxAge: 60 * 60 * 24 * 365
+    });
+
+    return newCookie;
+}

@@ -1,4 +1,7 @@
 <script>
+import {useCreatePersistenceCookie} from "~/composable/useCreateCookie.js";
+import {SidebarConstants} from "~/constants/SessionConstants.js";
+
 export default {
   setup() {
     const sidebarState = useAppSidebar();
@@ -8,7 +11,10 @@ export default {
   },
   methods : {
     ChangeLanguage(lang){
+      if(this.locale === lang) return;
+
      this.setLocale(lang);
+     useCreatePersistenceCookie(SidebarConstants.GET_UI_LANGUAGE,lang);
     }
   }
 }
@@ -34,7 +40,7 @@ export default {
               :class="locale === 'en'? 'active-language' : null "
           >
         </div>
-        <span class="mr-3 flex justify-center items-center" @click="sidebarState.ToggleSidebar">
+        <span class="mr-3 flex justify-center items-center cursor-pointer" @click="sidebarState.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
 
@@ -53,7 +59,7 @@ export default {
 </svg>
         </span>
       </div>
-      <div class="sidebar-bottom-hide" v-show="!sidebarState.isSidebarOpen">
+      <div class="sidebar-bottom-hide cursor-pointer" v-show="!sidebarState.isSidebarOpen">
         <div class="flex flex-col gap-4 w-full mb-4 mx-3 justify-center items-center">
           <img
               @click="ChangeLanguage('ge')"
@@ -94,7 +100,6 @@ export default {
   </div>
 </template>
 <style scoped>
-
 .sidebar-bottom {
   position: absolute;
   display: flex;
@@ -114,5 +119,9 @@ export default {
   bottom: 5rem;
   width: 100%;
   height: max-content;
+}
+.active-language {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
