@@ -1,5 +1,5 @@
 <script>
-import {useCreateNullValuePersistenceCookieOrGetExisted} from "~/composable/useCreateCookie.js";
+import {useCreateNullValuePersistenceCookieOrGetExisted} from "~/composables/useCreateCookie.js";
 import {SidebarConstants} from "~/constants/SessionConstants.js";
 
 export default {
@@ -10,14 +10,12 @@ export default {
     return {setLocale};
   },
   async created() {
-      // Check LANGUAGE Settings
-      let languageCookie = useCreateNullValuePersistenceCookieOrGetExisted(SidebarConstants.GET_UI_LANGUAGE);
-      if (languageCookie.value === undefined) languageCookie.value = this.locale;
-      else await this.setLocale(languageCookie.value);
-
+    // Check LANGUAGE Settings
+    let languageCookie = useCreateNullValuePersistenceCookieOrGetExisted(SidebarConstants.GET_UI_LANGUAGE);
+    if (languageCookie.value === undefined) languageCookie.value = this.locale;
+    else await this.setLocale(languageCookie.value);
   }
 }
-
 </script>
 <template>
   <nuxt-layout>

@@ -2,17 +2,13 @@
 import AppSidebarClosed from "~/components/sidebar/AppSidebarClosed.vue";
 import AppSidebarOpened from "~/components/sidebar/AppSidebarOpened.vue";
 import {SidebarConstants} from "~/constants/SessionConstants.js";
-import {
-  useCreateNullValuePersistenceCookieOrGetExisted
-} from "~/composable/useCreateCookie.js";
 
 export default {
   components: {AppSidebarOpened, AppSidebarClosed},
   setup() {
     let sidebarState = useAppSidebar();
-    const {locale, setLocale} = useI18n();
 
-    return {locale, setLocale, sidebarState};
+    return { sidebarState};
   },
   async created() {
     // CHECK SIDEBAR STATUS FROM COOKIE AND CREATE IT IF DOES NOT EXISTS

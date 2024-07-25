@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {SidebarConstants} from "~/constants/SessionConstants.js";
-import {useCreatePersistenceCookie} from "~/composable/useCreateCookie.js";
+import {useCreatePersistenceCookie} from "~/composables/useCreateCookie.js";
 
 export const useAppSidebar = defineStore('world', {
     state: () => {

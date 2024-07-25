@@ -1,5 +1,5 @@
 <script>
-import {useCreatePersistenceCookie} from "~/composable/useCreateCookie.js";
+import {useCreatePersistenceCookie} from "~/composables/useCreateCookie.js";
 import {SidebarConstants} from "~/constants/SessionConstants.js";
 
 export default {
