@@ -31,8 +31,6 @@ export default {
 <template>
   <app-sidebar-opened v-show="sidebarState.isSidebarOpen"/>
   <app-sidebar-closed v-show="!sidebarState.isSidebarOpen"/>
-  <hr>
-  {{sidebarState.isSidebarOpen}}
 </template>
 <style>
 .active {

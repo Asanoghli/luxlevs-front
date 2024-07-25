@@ -1,11 +1,15 @@
 <script>
 export default {
-  setup(){
+  setup() {
     const sidebarState = useAppSidebar();
-    const {locale,setLocale} = useI18n()
+    const {locale,setLocale} = useI18n();
 
-
-    return {sidebarState,locale}
+    return {sidebarState,locale,setLocale}
+  },
+  methods : {
+    ChangeLanguage(lang){
+     this.setLocale(lang);
+    }
   }
 }
 </script>
@@ -18,6 +22,7 @@ export default {
               class="size-10 cursor-pointer"
               src="/ge.png"
               alt="ქართული"
+              title="ქართული"
               :class="locale === 'ge'? 'active-language' : null "
           >
           <img
@@ -25,6 +30,7 @@ export default {
               class="size-10 cursor-pointer"
               src="/uk.png"
               alt="ქართული"
+              title="English"
               :class="locale === 'en'? 'active-language' : null "
           >
         </div>
@@ -110,5 +116,3 @@ export default {
   height: max-content;
 }
 </style>
-<script setup lang="ts">
-</script>
