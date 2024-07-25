@@ -16,6 +16,9 @@
     "pinia": "^2.1.7",
     "vue": "latest"
   },
+  "overrides": {
+    "vue": "latest"
+  },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1"
   }

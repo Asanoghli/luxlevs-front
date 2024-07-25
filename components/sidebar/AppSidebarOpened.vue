@@ -7,7 +7,7 @@ export default {
   setup() {
     let sidebarState = useAppSidebar();
     let {setLocale,locale} = useI18n();
-console.log(sidebarState.isSidebarOpen);
+    console.log('open : '+sidebarState.isSidebarOpen);
     return {sidebarState,setLocale,locale}
   },
   methods : {
@@ -19,7 +19,6 @@ console.log(sidebarState.isSidebarOpen);
 }
 </script>
 <template>
-
 <div
     class="flex flex-col items-center w-80 h-full overflow-hidden text-gray-400 bg-gray-900 relative rounded-r ">
 <a class="flex items-center w-full px-3 mt-3" href="#">

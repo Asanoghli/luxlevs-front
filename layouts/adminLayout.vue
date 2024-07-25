@@ -8,14 +8,6 @@ export default {
     let sidebarState = useAppSidebar();
 
     return {sidebarState};
-  },
-  methods: {},
-  mounted(){
-    // Is Sidebar Open Or Close
-    let hasKey = localStorage.getItem(SidebarConstants.IS_SIDEBAR_OPEN);
-    if(hasKey === null || hasKey ==='true') this.sidebarState.isSidebarOpen = true;
-    else
-      this.sidebarState.isSidebarOpen = false
   }
 }
 </script>

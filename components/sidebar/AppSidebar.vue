@@ -7,26 +7,23 @@ export default {
   components: {AppSidebarOpened, AppSidebarClosed},
   setup() {
     let sidebarState = useAppSidebar();
-    let {isSidebarOpen} = storeToRefs(sidebarState)
-
     const {locale, setLocale} = useI18n();
-    sidebarState.isSidebarOpen = false;
 
-    return {locale, setLocale, sidebarState,isSidebarOpen};
+    return {locale, setLocale, sidebarState};
   },
-  beforeMount() {
-    // Is Sidebar Open Or Close
-    let sidebarCookie = useCookie(SidebarConstants.IS_SIDEBAR_OPEN);
-
-    if (sidebarCookie.value === null || sidebarCookie.value === true) {
-      this.isSidebarOpen = true;
-    } else{
-      this.isSidebarOpen = false
-      sidebarCookie.value = false;
+  created() {
+    // CHECK SIDEBAR STATUS FROM COOKIE AND CREATE IT IF DOES NOT EXISTS
+    if(process.server){ // RUN ONLY SERVER SIDE
+      console.log('TWICE');
+      let sidebarCookie = useCookie(SidebarConstants.IS_SIDEBAR_OPEN);
+      if (sidebarCookie.value === null || sidebarCookie.value === true) {
+        this.sidebarState.isSidebarOpen = true;
+      } else{
+        this.sidebarState.isSidebarOpen = false
+        sidebarCookie.value = false;
+      }
     }
-    this.isSidebarOpen = true
-    console.log(process.server)
-    console.log(process.server)
+    //END CHECK SIDEBAR STATUS FROM COOKIE AND CREATE IT IF DOES NOT EXISTS
 
   }
 }
@@ -34,6 +31,8 @@ export default {
 <template>
   <app-sidebar-opened v-show="sidebarState.isSidebarOpen"/>
   <app-sidebar-closed v-show="!sidebarState.isSidebarOpen"/>
+  <hr>
+  {{sidebarState.isSidebarOpen}}
 </template>
 <style>
 .active {
