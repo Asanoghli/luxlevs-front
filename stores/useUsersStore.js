@@ -62,7 +62,13 @@ export const useUsersStore = defineStore('usersStore', {
                     id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
                 },
 
-            ])
+            ]),
+            showCreateNewUserModal : false
+        }
+    },
+    actions : {
+        ToggleCreateUserModal(){
+            this.showCreateNewUserModal = !this.showCreateNewUserModal;
         }
     },
     getters:  {

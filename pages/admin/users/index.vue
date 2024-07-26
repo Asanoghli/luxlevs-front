@@ -1,16 +1,17 @@
 <script>
 
 import UsersTableSearchBar from "~/components/users/usersTableSearchBar.vue";
+import UsersCreateNewUserModal from "~/components/users/usersCreateNewUserModal.vue";
 
 export default {
-  components: {UsersTableSearchBar},
+  components: {UsersCreateNewUserModal, UsersTableSearchBar},
   setup() {
-    let sidebarState = useAppSidebar();
+    let usersStore = useUsersStore();
     definePageMeta({
       layout: 'admin-layout'
     })
 
-    return {sidebarState}
+    return {usersStore}
   },
 
 }
@@ -22,7 +23,7 @@ export default {
       <users-table-component/>
     </div>
   </div>
-
+<users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>
 </template>
 <style scoped>
 .checkmark {
