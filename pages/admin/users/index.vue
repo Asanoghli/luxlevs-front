@@ -16,9 +16,9 @@ export default {
 }
 </script>
 <template>
-  <div class="h-full w-full max-h-dvh overflow-y-scroll overflow-x-scroll flex flex-col">
+  <div class="h-full w-full max-h-dvh overflow-hidden flex flex-col">
     <users-table-search-bar/>
-    <div class="w-full overflow-x-scroll">
+    <div class="w-full overflow-x-hidden">
       <users-table-component/>
     </div>
   </div>
