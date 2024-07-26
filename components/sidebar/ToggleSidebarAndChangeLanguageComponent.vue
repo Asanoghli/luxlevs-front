@@ -78,7 +78,7 @@ export default {
 
           >
         </div>
-        <span class="self-end mr-3.5" @click="sidebarState.ToggleSidebar">
+        <span  class="self-end mr-3.5 sm:hidden hidden md:hidden lg:block" @click="sidebarState.ToggleSidebar">
             <svg width="25px" height="25px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
 
