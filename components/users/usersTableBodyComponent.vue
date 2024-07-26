@@ -8,8 +8,8 @@ export default {
 }
 </script>
 <template>
-  <tbody class="bg-white divide-y divide-gray-200">
-  <tr class="h-14" v-for="user in usersStore.users" :key="user.id" :class="user.checked ? 'bg-gray-300' : null">
+  <tbody class="bg-white divide-y divide-gray-200 overflow-hidden">
+  <tr class="h-14 overflow-hidden" v-for="user in usersStore.users" :key="user.id" :class="user.checked ? 'bg-gray-300' : null">
     <td class="px-6 whitespace-nowrap">
       <label @click="user.checked = !user.checked">
         <svg v-show="user.checked" xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 32 32">

@@ -11,9 +11,14 @@ export default {
 }
 </script>
 <template>
-  <table class="w-full  divide-y divide-gray-200 overflow-x-auto">
-    <users-table-head-component/>
-    <users-table-body-component/>
-  </table>
+  <div class="w-full">
+    <table class="divide-y divide-gray-200 w-full">
+      <users-table-head-component/>
+      <users-table-body-component/>
+    </table>
+  </div>
+
 
 </template>
+<style scoped>
+</style>

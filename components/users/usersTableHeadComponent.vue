@@ -15,7 +15,7 @@ export default {
 }
 </script>
 <template>
-  <thead class="bg-gray-200 sticky top-0">
+  <thead class="bg-gray-200 ">
   <tr>
     <th scope="col" class="px-6 size-0 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           <span v-show="usersStore.GetIsAnyoneChecked">

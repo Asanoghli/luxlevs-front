@@ -16,10 +16,13 @@ export default {
 }
 </script>
 <template>
-  <div class="w-full h-full max-h-dvh overflow-y-scroll">
+  <div class="h-full w-full max-h-dvh overflow-y-scroll overflow-x-scroll flex flex-col">
     <users-table-search-bar/>
-    <users-table-component/>
+    <div class="w-full overflow-x-scroll">
+      <users-table-component/>
+    </div>
   </div>
+
 </template>
 <style scoped>
 .checkmark {
