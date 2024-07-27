@@ -8,7 +8,10 @@ export default {
   setup() {
     let usersStore = useUsersStore();
     definePageMeta({
-      layout: 'admin-layout'
+      layout: 'admin-layout',
+      middleware: [
+          'auth-middleware'
+      ]
     })
 
     return {usersStore}

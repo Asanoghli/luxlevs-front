@@ -21,7 +21,7 @@ export  default{
       </svg>
     </a>
     <div class="flex flex-col items-center mt-3 border-t border-gray-700">
-      <nuxt-link :title="$t('admin.sidebar.main')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin"
+      <nuxt-link :title="$t('admin.sidebar.main')" active-class="active" class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" to="/admin/main"
          >
         <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">

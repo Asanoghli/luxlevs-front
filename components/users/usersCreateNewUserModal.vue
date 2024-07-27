@@ -5,8 +5,23 @@ export  default {
 
 
     return {usersStore};
+  },
+  methods : {
+    async CreateNewUser(){
+      let res = await $fetch('http://localhost:5144/admin/users/create',{
+        method: 'POST',
+        body : {
+          firstName : 'Levan',
+          lastName : 'Asanoghli',
+          email : 'Asanoghli123@gmail.com',
+          username : 'asanoghliLevani',
+          password : 'Drakula9X!.',
+        },
+        server:false
+      })
+      console.log(res);
+    }
   }
-
 }
 </script>
 <template>
@@ -66,7 +81,7 @@ export  default {
           </div>
           <div class="bg-gray-800 px-4 py-3 flex flex-row gap-3">
             <button @click="usersStore.ToggleCreateUserModal" type="button" class="w-full justify-center rounded bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 ">დახურვა</button>
-            <button type="button" class="w-full justify-center rounded bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 ">დამატება</button>
+            <button @click="CreateNewUser" type="button" class="w-full justify-center rounded bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 ">დამატება</button>
           </div>
         </div>
       </div>
