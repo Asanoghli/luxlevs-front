@@ -27,18 +27,23 @@ export const useAuthStore = defineStore('authStore', {
 
             return false;
         },
-         AuthByCookie(token, validTo) {
+        AuthByCookie(token, validTo) {
             this.token = token;
             this.validTo = validTo;
             useCreatePersistenceCookie(AuthConstants.USER_TOKEN, this.token);
         },
-            async ValidateToken(token){
-            console.log('SENDING...')
-             let isValid = await $fetch(`http://localhost:5144/auth/validate-token?token=${token}`,{
-                method:'POST',
-            });
+        async ValidateToken(token) {
+            let isValid  =false;
+            try {
+                isValid = await $fetch(`http://localhost:5144/auth/validate-token?token=${token}`, {
+                    method: 'POST',
+                });
+            }
+            catch{
+                
+            }
 
-                return isValid;
+            return isValid;
         }
 
     },
