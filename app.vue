@@ -6,10 +6,9 @@ export default {
   setup() {
     let {setLocale} = useI18n();
     let authStore = useAuthStore();
-    let tokenCookie = useCookie(AuthConstants.USER_TOKEN);
 
 
-    return {setLocale, authStore, tokenCookie};
+    return {setLocale, authStore};
   },
   async created() {
     // Check LANGUAGE Settings
@@ -17,8 +16,6 @@ export default {
     if (languageCookie.value === undefined) languageCookie.value = this.locale;
     else await this.setLocale(languageCookie.value);
 
-    // Check AUTH Credintials
-    if (this.tokenCookie !== undefined) this.authStore.token = this.tokenCookie.value;
 
   }
 }
