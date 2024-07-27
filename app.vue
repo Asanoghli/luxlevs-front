@@ -7,10 +7,9 @@ export default {
     let {setLocale} = useI18n();
     let authStore = useAuthStore();
     let tokenCookie = useCookie(AuthConstants.USER_TOKEN);
-    let validToCookie = useCookie(AuthConstants.USER_TOKEN_VALID_TO);
 
 
-    return {setLocale, authStore, tokenCookie, validToCookie};
+    return {setLocale, authStore, tokenCookie};
   },
   async created() {
     // Check LANGUAGE Settings
@@ -19,11 +18,8 @@ export default {
     else await this.setLocale(languageCookie.value);
 
     // Check AUTH Credintials
-    console.log(this.tokenCookie)
-    if (this.tokenCookie.value !== undefined && this.validToCookie.value !== undefined) {
-      console.log('yep');
-      this.authStore.AuthByCookie(this.tokenCookie.value, this.validToCookie.value);
-    }
+    if (this.tokenCookie !== undefined) this.authStore.token = this.tokenCookie.value;
+
   }
 }
 </script>

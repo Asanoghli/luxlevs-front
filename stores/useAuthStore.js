@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('authStore', {
             isAuthenticated: false,
             userData: reactive({}),
             token: '',
-            validTo: ''
         }
     },
     actions: {
@@ -32,13 +31,12 @@ export const useAuthStore = defineStore('authStore', {
             this.token = token;
             this.validTo = validTo;
             useCreatePersistenceCookie(AuthConstants.USER_TOKEN, this.token);
-            useCreatePersistenceCookie(AuthConstants.USER_TOKEN_VALID_TO, this.validTo);
         }
     },
     getters: {
         isAuthenticated() {
             let cookie = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
-            let isValid = cookie.value !== undefined && new Date(this.validTo) > new Date();
+            let isValid = cookie.value !== undefined;
 
             return isValid;
         }
