@@ -114,7 +114,10 @@ export default {
 @apply h-dvh bg-gradient-to-br from-gray-700 to-gray-950 flex justify-center items-center flex-col;
 }
 .modal-wrapper{
-  @apply flex gap-5 justify-center shadow-blue-600 shadow-2xl items-center flex-col lg:h-fit bg-gray-950 lg:w-1/4 rounded-md overflow-hidden ;
+  @apply flex gap-5 justify-center shadow-blue-600 shadow-2xl items-center
+  flex-col lg:h-fit bg-gray-950 rounded-md overflow-hidden
+  w-3/4 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 2xl:w-1/4
+  ;
 }
 
 .logo-and-header-container{
@@ -125,7 +128,7 @@ export default {
   @apply flex items-end justify-center flex-col gap-1;
 }
 .header-text{
-  @apply text-white text-4xl font-bold -tracking-tighter;
+  @apply text-white text-xl  md:text-4xl font-bold -tracking-tighter;
 }
 .header-slogan-text{
   @apply text-white -tracking-tighter;
