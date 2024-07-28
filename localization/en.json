@@ -9,6 +9,15 @@
       "pages" : "Pages",
       "messages" : "Messages",
       "account": "Account"
+    },
+    "login": {
+      "header-slogan": "Your Choise, Your Future.",
+      "input-username-placeholder": "Username",
+      "input-password-placeholder": "Password",
+      "incorrect-username-or-password": "Incorrect username or password",
+      "username-is-required" : "Username is required",
+      "password-is-required" : "Password is required",
+      "btn-login" : "LOGIN"
     }
   }
 }

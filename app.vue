@@ -1,24 +1,5 @@
 <script>
-import {useCreateNullValuePersistenceCookieOrGetExisted} from "~/composables/useCreateCookie.js";
-import {AuthConstants, SidebarConstants} from "~/constants/SessionConstants.js";
 
-export default {
-  setup() {
-    let {setLocale} = useI18n();
-    let authStore = useAuthStore();
-
-
-    return {setLocale, authStore};
-  },
-  async created() {
-    // Check LANGUAGE Settings
-    let languageCookie = useCreateNullValuePersistenceCookieOrGetExisted(SidebarConstants.GET_UI_LANGUAGE);
-    if (languageCookie.value === undefined) languageCookie.value = this.locale;
-    else await this.setLocale(languageCookie.value);
-
-
-  }
-}
 </script>
 <template>
   <nuxt-layout>

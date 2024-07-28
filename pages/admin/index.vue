@@ -2,6 +2,7 @@
 
 import {required, helpers} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import {SidebarConstants} from "~/constants/SessionConstants.js";
 
 export default {
   setup() {
@@ -23,7 +24,9 @@ export default {
     let authStore = useAuthStore();
     let router = useRouter();
     let isPasswordInvalid = ref(false);
-    return {authStore, router, userModel, v,isPasswordInvalid}
+    let {locale,setLocale}  = useI18n();
+
+    return {authStore, router, userModel, v,isPasswordInvalid,setLocale}
   },
   methods: {
     async SignIn() {
@@ -40,6 +43,10 @@ export default {
       } else {
         this.isPasswordInvalid = true;
       }
+    },
+    ChangeLanguage(lang){
+      this.setLocale(lang);
+      useCreatePersistenceCookie(SidebarConstants.GET_UI_LANGUAGE,lang);
     }
   },
   computed : {
@@ -63,10 +70,10 @@ export default {
   <div class="modal-container">
     <div  class="modal-wrapper">
       <div class="logo-and-header-container">
-        <img src="/logo.png" alt="" class="size-24">
+        <img src="/logo.png" alt="Luxlevs" class="size-24">
         <div class="header-and-slogan-container">
           <span class="header-text">LUXLEVS.COM</span>
-          <span class="header-slogan-text">შენი არჩევანი, შენო მომავალი.</span>
+          <span class="header-slogan-text">{{ $t('admin.login.header-slogan') }}</span>
         </div>
       </div>
       <hr class="border-spacing-1 border-gray-700 w-full">
@@ -74,21 +81,29 @@ export default {
         <div class="flex flex-col  w-full gap-2 ">
           <input v-model.lazy="v.username.$model" class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300"
                  :class="[GetInvalidClassesIfDirtyAndInvalidUsername, GetValidClassesIfDirtyAndValidUsername]"
-                 type="text" placeholder="Username">
-          <span v-show="v.username.$error" class="text-red-500">მომხმარებლის სახელი სავალდებულოა</span>
+                 type="text" :placeholder="$t('admin.login.input-username-placeholder')">
+          <span v-show="v.username.$error" class="text-red-500">{{ $t('admin.login.username-is-required') }}</span>
         </div>
         <div class="flex flex-col  w-full gap-3">
           <input v-model.lazy="v.password.$model"
                  class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300" type="text"
                  :class="[GetInvalidClassesIfDirtyAndInvalidPassword, GetValidClassesIfDirtyAndValidPassword]"
-                 placeholder="Password">
-          <span v-show="v.password.$error" class="text-red-500">პაროლი სავალდებულოა</span>
-          <span v-show="isPasswordInvalid" class="text-red-500">არასწორი ლოგინი ან პაროლი</span>
+                 :placeholder="$t('admin.login.input-password-placeholder')">
+          <span v-show="v.password.$error" class="text-red-500">{{$t('admin.login.password-is-required')}}</span>
+          <span v-show="isPasswordInvalid" class="text-red-500">{{ $t('admin.login.incorrect-username-or-password') }}</span>
         </div>
         <button  @click.prevent="SignIn" class="btn-login ">
-          <span class="btn-login-text">LOGIN</span>
+          <span class="btn-login-text">{{ $t('admin.login.btn-login') }}</span>
         </button>
       </form>
+      <div class="text-gray-300 flex justify-start gap-4 w-full">
+        <button @click="ChangeLanguage('ge')">
+          <img src="/ge.png" class="size-10" alt="">
+        </button>
+        <button>
+          <img @click="ChangeLanguage('en')" src="/uk.png" class="size-10" alt="">
+        </button>
+      </div>
     </div>
   </div>
 </template>
