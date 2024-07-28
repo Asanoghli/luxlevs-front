@@ -1,7 +1,6 @@
 import {AuthConstants} from "~/constants/SessionConstants.js";
 
 export default defineNuxtRouteMiddleware(async (to, from,next) => {
-    if(import.meta.server) return;
     let hasAuthTokenCookie = useCookie(AuthConstants.USER_TOKEN);
 
     let hasTokenCookie = hasAuthTokenCookie.value !== undefined;
@@ -22,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to, from,next) => {
         return;
     }
     let isValidToken = await authStore.ValidateToken(hasAuthTokenCookie.value);
-
+    
     if (isLoginPage && isValidToken) { // If Login page And AUTHENTICATED
         return navigateTo('/admin/users')
     }
