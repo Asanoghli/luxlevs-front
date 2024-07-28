@@ -27,17 +27,33 @@ export default {
   },
   methods: {
     async SignIn() {
+      if(this.v.$invalid){
+      this.v.$validate();
+      return;
+      }
+
       let isSignedIn = await this.authStore.Authenticate(this.userModel);
       console.log(isSignedIn)
       if (isSignedIn) {
+        this.isPasswordInvalid = false;
         await this.router.push('/admin/main');
       } else {
-        this.v.$reset();
         this.isPasswordInvalid = true;
       }
+    }
+  },
+  computed : {
+    GetInvalidClassesIfDirtyAndInvalidUsername(){
+      return !this.v.username.$error && this.v.username.$dirty ? 'border-green-500 border' : null;
     },
-    showV() {
-      console.log(this.v)
+    GetValidClassesIfDirtyAndValidUsername(){
+    return this.v.username.$error && this.v.username.$dirty ? 'border-red-500 border' : null;
+    },
+    GetInvalidClassesIfDirtyAndInvalidPassword(){
+      return !this.v.password.$error && this.v.password.$dirty ? 'border-green-500 border' : null;
+    },
+    GetValidClassesIfDirtyAndValidPassword(){
+      return this.v.password.$error && this.v.password.$dirty ? 'border-red-500 border' : null;
     }
   }
 
@@ -57,16 +73,19 @@ export default {
       <form action="" class="flex justify-start w-full flex-col gap-4">
         <div class="flex flex-col  w-full gap-2 ">
           <input v-model.lazy="v.username.$model" class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300"
+                 :class="[GetInvalidClassesIfDirtyAndInvalidUsername, GetValidClassesIfDirtyAndValidUsername]"
                  type="text" placeholder="Username">
           <span v-show="v.username.$error" class="text-red-500">მომხმარებლის სახელი სავალდებულოა</span>
         </div>
         <div class="flex flex-col  w-full gap-3">
-          <input v-model.lazy="v.password.$model" class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300" type="text"
+          <input v-model.lazy="v.password.$model"
+                 class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300" type="text"
+                 :class="[GetInvalidClassesIfDirtyAndInvalidPassword, GetValidClassesIfDirtyAndValidPassword]"
                  placeholder="Password">
           <span v-show="v.password.$error" class="text-red-500">პაროლი სავალდებულოა</span>
           <span v-show="isPasswordInvalid" class="text-red-500">არასწორი ლოგინი ან პაროლი</span>
         </div>
-        <button @click.prevent="SignIn" class="btn-login">
+        <button  @click.prevent="SignIn" class="btn-login ">
           <span class="btn-login-text">LOGIN</span>
         </button>
       </form>
