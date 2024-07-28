@@ -21,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to, from,next) => {
         return;
     }
     let isValidToken = await authStore.ValidateToken(hasAuthTokenCookie.value);
-    
+
     if (isLoginPage && isValidToken) { // If Login page And AUTHENTICATED
         return navigateTo('/admin/users')
     }
