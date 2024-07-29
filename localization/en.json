@@ -18,6 +18,11 @@
       "username-is-required" : "Username is required",
       "password-is-required" : "Password is required",
       "btn-login" : "LOGIN"
+    },
+    "users" : {
+      "create": {
+        "firstname-required" : "Firstname required"
+      }
     }
   }
 }

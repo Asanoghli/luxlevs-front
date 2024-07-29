@@ -27,13 +27,9 @@ export default {
       <div class="text-sm font-medium text-gray-900">
         {{ user.firstName }} {{ user.lastName }}
       </div>
-      <div class="text-sm text-gray-500">
-        jane.cooper@example.com
-      </div>
     </td>
     <td class="px-6 whitespace-nowrap">
       <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-      <div class="text-sm text-gray-500">Optimization</div>
     </td>
     <td class="px-6 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

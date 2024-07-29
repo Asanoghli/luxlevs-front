@@ -1,13 +1,13 @@
 {
-  "admin" : {
+  "admin": {
     "sidebar": {
-      "main" : "მთავარი",
+      "main": "მთავარი",
       "users": "მომხმარებლები",
       "roles": "როლები",
       "settings": "საიტის პარამეტრები",
       "contact": "საკონტაქტო ინფორმაცია",
-      "pages" : "გვერდები",
-      "messages" : "შეტყობინებები",
+      "pages": "გვერდები",
+      "messages": "შეტყობინებები",
       "account": "ანგარიში"
     },
     "login": {
@@ -15,9 +15,14 @@
       "input-username-placeholder": "მომხმარებლის სახელი",
       "input-password-placeholder": "პაროლი",
       "incorrect-username-or-password": "მომხმარებლის სახელი ან პაროლი არასწორია.",
-      "username-is-required" : "მომხმარებლის სახელი სავალდებულოა",
-      "password-is-required" : "პაროლი სავალდებულოა",
-      "btn-login" : "შესვლა"
+      "username-is-required": "მომხმარებლის სახელი სავალდებულოა",
+      "password-is-required": "პაროლი სავალდებულოა",
+      "btn-login": "შესვლა"
+    },
+    "users": {
+      "create": {
+        "firstname-is-required": "სახელი სავალდებულოა"
+      }
     }
   }
 }
