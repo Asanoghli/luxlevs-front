@@ -25,24 +25,25 @@ export default {
     let router = useRouter();
     let isPasswordInvalid = ref(false);
     let {locale,setLocale}  = useI18n();
+    let isLoading = ref(false);
 
-    return {authStore, router, userModel, v,isPasswordInvalid,setLocale,locale}
+    return {authStore, router, userModel, v,isPasswordInvalid,setLocale,locale,isLoading}
   },
   methods: {
     async SignIn() {
-      if(this.v.$invalid){
+      if(this.v.$invalid || this.isLoading){
       this.v.$validate();
       return;
       }
-
+      this.isLoading = true;
       let isSignedIn = await this.authStore.Authenticate(this.userModel);
-      console.log(isSignedIn)
       if (isSignedIn) {
         this.isPasswordInvalid = false;
         await this.router.push('/admin/main');
       } else {
         this.isPasswordInvalid = true;
       }
+      this.isLoading = false;
     },
     ChangeLanguage(lang){
       this.setLocale(lang);
@@ -93,7 +94,8 @@ export default {
             <span v-show="isPasswordInvalid" class="text-red-500">{{ $t('admin.login.incorrect-username-or-password') }}</span>
           </div>
           <button  @click.prevent="SignIn" class="btn-login ">
-            <span class="btn-login-text">{{ $t('admin.login.btn-login') }}</span>
+            <svg v-show="isLoading" xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 24 24"><circle cx="4" cy="12" r="3" fill="currentColor"><animate id="svgSpinners3DotsFade0" fill="freeze" attributeName="opacity" begin="0;svgSpinners3DotsFade1.end-0.375s" dur="1.125s" values="1;0.2"/></circle><circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.4"><animate fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.225s" dur="1.125s" values="1;0.2"/></circle><circle cx="20" cy="12" r="3" fill="currentColor" opacity="0.3"><animate id="svgSpinners3DotsFade1" fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.45s" dur="1.125s" values="1;0.2"/></circle></svg>
+            <span v-show="!isLoading" class="btn-login-text">{{ $t('admin.login.btn-login') }}</span>
           </button>
         </form>
         <div class="text-gray-300 flex justify-center gap-4 w-full">
