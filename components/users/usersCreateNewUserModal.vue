@@ -1,7 +1,12 @@
 <script>
 import useVuelidate from "@vuelidate/core";
-import {required, minLength, maxLength, createI18nMessage, email} from '@vuelidate/validators'
+import {required, minLength, maxLength, createI18nMessage, email,requiredIf} from '@vuelidate/validators'
 import {ValidationConstants} from "~/constants/ValidationConstants.js";
+import {
+  PasswordMustContainOneCharacter,
+  PasswordMustContainsOneLowerCase, PasswordMustContainsOneNumeric,
+  PasswordMustContainsOneUpperCase
+} from "~/validators/customvalidations.js";
 export default {
   setup() {
     let {$i18n} = useNuxtApp();
@@ -32,6 +37,15 @@ export default {
         invalidEmail: withI18nMessage(email,{messagePath:_=>'admin.users.create.email-invalid'}),
         minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.EMAIL_MIN_LENGTH),{messagePath:_=>'admin.users.create.email-minlength'}),
         maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH),{messagePath:_=>'admin.users.create.email-maxlength'})
+      },
+      password : {
+        required : withI18nMessage(required,{messagePath:_=>'admin.users.create.password-required'}),
+        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.PASSWORD_MIN_LENGTH),{messagePath:_=>'admin.users.create.password-minlength'}),
+        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.PASSWORD_MAX_LENGTH),{messagePath:_=>'admin.users.create.password-maxlength'}),
+        mustContainsOneCharacter : withI18nMessage(PasswordMustContainOneCharacter,{messagePath:_=>'admin.users.create.password-not-contains-character'}),
+        mustContainsOneNumeric : withI18nMessage(PasswordMustContainsOneNumeric,{messagePath:_=>'admin.users.create.password-not-contains-numeric'}),
+        mustContainsOneLowerCase : withI18nMessage(PasswordMustContainsOneLowerCase,{messagePath:_=>'admin.users.create.password-not-contains-lowercase'}),
+        mustContainsOneUpperCase : withI18nMessage(PasswordMustContainsOneUpperCase,{messagePath:_=>'admin.users.create.password-not-contains-uppercase'}),
       }
 
     }
