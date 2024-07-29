@@ -21,7 +21,13 @@
     },
     "users" : {
       "create": {
-        "firstname-required" : "Firstname required"
+        "firstname-required" : "Firstname is required",
+        "firstname-minlength" : "Firstname must be at least {min} characters long",
+        "firstname-maxlength" : "Firstname must be at most {max} characters long",
+
+        "lastname-required" : "Lastname is required",
+        "lastname-minlength" : "Lastname must be at least {min} characters long",
+        "lastname-maxlength" : "Lastname must be at most {max} characters long"
       }
     }
   }

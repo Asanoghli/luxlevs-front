@@ -21,7 +21,13 @@
     },
     "users": {
       "create": {
-        "firstname-is-required": "სახელი სავალდებულოა"
+        "firstname-required": "სახელი სავალდებულოა",
+        "firstname-minlength" : "სახელი უნდა შეიცავდეს მინიმუმ {min} სიმბოლოს.",
+        "firstname-maxlength" : "სახელი უნდა შეიცავდეს მაქსიმუმ {max} სიმბოლოს.",
+
+        "lastname-required" : "გვარი სავალდებულოა",
+        "lastname-minlength" : "გვარი უნდა შეიცავდეს მინიმუმ {min} სიმბოლოს.",
+        "lastname-maxlength" : "გვარი  უნდა შეიცავდეს მაქსიმუმ {max} სიმბოლოს."
       }
     }
   }

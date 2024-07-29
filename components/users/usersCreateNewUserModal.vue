@@ -23,29 +23,29 @@ export default {
     });
     let rules = {
       firstName : {
-          required : withI18nMessage(required,{messagePath:_=>'admin.users.create.firstname-required',withArguments:true}),
+          required : withI18nMessage(required,{messagePath:()=>'admin.users.create.firstname-required'}),
           minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.FIRSTNAME_MIN_LENGTH),{messagePath:_=>'admin.users.create.firstname-minlength'}),
-          maxLength : withI18nMessage(minLength(ValidationConstants.ADMIN.FIRSTNAME_MAX_LENGTH),{messagePath:_=>'admin.users.create.firstname-maxlength'}),
+          maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.FIRSTNAME_MAX_LENGTH),{messagePath:_=>'admin.users.create.firstname-maxlength'}),
       },
       lastName : {
-        required : withI18nMessage(required,{messagePath:_=>'admin.users.create.lastname-required',withArguments:true}),
-        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.LASTNAME_MIN_LENGTH),{messagePath:_=>'admin.users.create.lastname-minlength'}),
-        maxLength : withI18nMessage(minLength(ValidationConstants.ADMIN.LASTNAME_MAX_LENGTH),{messagePath:_=>'admin.users.create.lastname-maxlength'}),
+        required : withI18nMessage(required,{messagePath:()=>'admin.users.create.lastname-required',withArguments:true}),
+        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.LASTNAME_MIN_LENGTH),{messagePath:()=>'admin.users.create.lastname-minlength'}),
+        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.LASTNAME_MAX_LENGTH),{messagePath:()=>'admin.users.create.lastname-maxlength'}),
       },
       email : {
         required : withI18nMessage(required,{messagePath:_=>'admin.users.create.email-required'}),
         invalidEmail: withI18nMessage(email,{messagePath:_=>'admin.users.create.email-invalid'}),
-        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.EMAIL_MIN_LENGTH),{messagePath:_=>'admin.users.create.email-minlength'}),
-        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH),{messagePath:_=>'admin.users.create.email-maxlength'})
+        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.EMAIL_MIN_LENGTH),{messagePath:()=>'admin.users.create.email-minlength'}),
+        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH),{messagePath:()=>'admin.users.create.email-maxlength'})
       },
       password : {
         required : withI18nMessage(required,{messagePath:_=>'admin.users.create.password-required'}),
-        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.PASSWORD_MIN_LENGTH),{messagePath:_=>'admin.users.create.password-minlength'}),
-        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.PASSWORD_MAX_LENGTH),{messagePath:_=>'admin.users.create.password-maxlength'}),
-        mustContainsOneCharacter : withI18nMessage(PasswordMustContainOneCharacter,{messagePath:_=>'admin.users.create.password-not-contains-character'}),
-        mustContainsOneNumeric : withI18nMessage(PasswordMustContainsOneNumeric,{messagePath:_=>'admin.users.create.password-not-contains-numeric'}),
-        mustContainsOneLowerCase : withI18nMessage(PasswordMustContainsOneLowerCase,{messagePath:_=>'admin.users.create.password-not-contains-lowercase'}),
-        mustContainsOneUpperCase : withI18nMessage(PasswordMustContainsOneUpperCase,{messagePath:_=>'admin.users.create.password-not-contains-uppercase'}),
+        minLength : withI18nMessage(minLength(ValidationConstants.ADMIN.PASSWORD_MIN_LENGTH),{messagePath:()=>'admin.users.create.password-minlength'}),
+        maxLength : withI18nMessage(maxLength(ValidationConstants.ADMIN.PASSWORD_MAX_LENGTH),{messagePath:()=>'admin.users.create.password-maxlength'}),
+        mustContainsOneCharacter : withI18nMessage(PasswordMustContainOneCharacter,{messagePath:()=>'admin.users.create.password-not-contains-character'}),
+        mustContainsOneNumeric : withI18nMessage(PasswordMustContainsOneNumeric,{messagePath:()=>'admin.users.create.password-not-contains-numeric'}),
+        mustContainsOneLowerCase : withI18nMessage(PasswordMustContainsOneLowerCase,{messagePath:()=>'admin.users.create.password-not-contains-lowercase'}),
+        mustContainsOneUpperCase : withI18nMessage(PasswordMustContainsOneUpperCase,{messagePath:()=>'admin.users.create.password-not-contains-uppercase'}),
       }
 
     }
@@ -110,14 +110,20 @@ export default {
             </button>
           </div>
           <div class="bg-gray-900 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
+            <div v-show="v.$errors.length > 0" class="h-auto bg-gray-800 mb-5 p-5 rounded">
+              <ul class="list-disc w-full marker:m-0 marker:p-0 list-inside m-0 p-0">
+                <li class="text-red-500 p-1 " v-for="error in v.$errors">{{error.$message}}</li>
+              </ul>
+            </div>
+
             <div class="flex items-start flex-col gap-3">
-              <div class="flex items-center w-full">
+              <div class="flex items-center justify-start w-full">
                 <label class="w-1/3 text-gray-400" for="">სახელი</label>
-                <input v-model="v.firstName.$model" class="p-2 bg-gray-600 text-gray-300 rounded w-auto grow  focus:outline-0" type="text">
+                  <input v-model.lazy="v.firstName.$model" class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
               </div>
               <div class="flex items-center justify-start w-full">
                 <label class="w-1/3 text-gray-400" for="">გვარი</label>
-                <input class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
+                <input v-model.lazy="v.lastName.$model" class="p-2 bg-gray-600 text-gray-300 rounded w-auto grow  focus:outline-0" type="text">
               </div>
               <div class="flex items-center justify-start w-full">
                 <label class="w-1/3 text-gray-400" for="">ელ.ფოსტა</label>
@@ -132,7 +138,7 @@ export default {
                 <input class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
               </div>
             </div>
-            <p class="text-white">{{JSON.stringify(v.firstName)}}</p>
+<!--            <p class="text-white">{{JSON.stringify(v.firstName)}}</p>-->
 
           </div>
           <div class="bg-gray-800 px-4 py-3 flex flex-row gap-3">
