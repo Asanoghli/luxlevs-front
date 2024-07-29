@@ -26,7 +26,7 @@ export default {
     let isPasswordInvalid = ref(false);
     let {locale,setLocale}  = useI18n();
 
-    return {authStore, router, userModel, v,isPasswordInvalid,setLocale}
+    return {authStore, router, userModel, v,isPasswordInvalid,setLocale,locale}
   },
   methods: {
     async SignIn() {
@@ -97,10 +97,10 @@ export default {
           </button>
         </form>
         <div class="text-gray-300 flex justify-center gap-4 w-full">
-          <button @click="ChangeLanguage('ge')">
+          <button :class="locale ==='ge' ? 'opacity-50 cursor-not-allowed' : null" @click="ChangeLanguage('ge')">
             <img src="/ge.png" class="size-10" alt="">
           </button>
-          <button>
+          <button :class="locale ==='en' ? 'opacity-50 cursor-not-allowed' : null">
             <img @click="ChangeLanguage('en')" src="/uk.png" class="size-10" alt="">
           </button>
         </div>
@@ -116,7 +116,7 @@ export default {
 .modal-wrapper{
   @apply flex gap-5 justify-center shadow-blue-600 shadow-2xl items-center
   flex-col lg:h-fit bg-gray-950 rounded-md overflow-hidden
-  w-3/4 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 2xl:w-1/4
+  w-[90%] sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 2xl:w-1/4
   ;
 }
 
@@ -128,7 +128,7 @@ export default {
   @apply flex items-end justify-center flex-col gap-1;
 }
 .header-text{
-  @apply text-white text-xl  md:text-4xl font-bold -tracking-tighter;
+  @apply text-white text-2xl  md:text-4xl font-bold -tracking-tighter;
 }
 .header-slogan-text{
   @apply text-white -tracking-tighter;
