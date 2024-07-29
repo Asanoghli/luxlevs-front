@@ -27,8 +27,31 @@
 
         "lastname-required" : "Lastname is required",
         "lastname-minlength" : "Lastname must be at least {min} characters long",
-        "lastname-maxlength" : "Lastname must be at most {max} characters long"
-      }
+        "lastname-maxlength" : "Lastname must be at most {max} characters long",
+
+        "email-required": "Email is required",
+        "email-invalid": "Invalid Email address",
+        "email-minlength": "Email must be at least {min} characters long",
+        "email-maxlength": "Email must be at most {min} characters long",
+
+        "password-required": "Password is required.",
+        "password-minlength": "Password must be at least {min} characters long.",
+        "password-maxlength": "Password must be at most {max} characters long.",
+        "password-min-one-digit": "Password must contain at least one digit",
+        "password-min-one-symbol": "Password must contain at least one symbol",
+        "password-min-one-upper": "Password must contain at least one uppercase letter",
+        "password-min-one-lower": "Password must contain at least one lowercase letter"
+      },
+      "firstname" : "Firstname",
+      "lastname": "Lastname",
+      "email": "E-Mail",
+      "password" : "Password",
+      "status" : "Status",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "add-user" : "Add new user",
+      "search": "Search",
+      "delete" : "Delete"
     }
   }
 }
