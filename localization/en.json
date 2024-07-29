@@ -38,9 +38,9 @@
         "password-minlength": "Password must be at least {min} characters long.",
         "password-maxlength": "Password must be at most {max} characters long.",
         "password-min-one-digit": "Password must contain at least one digit",
-        "password-min-one-symbol": "Password must contain at least one symbol",
-        "password-min-one-upper": "Password must contain at least one uppercase letter",
-        "password-min-one-lower": "Password must contain at least one lowercase letter"
+        "password-min-one-symbol": "Password must contain at least one symbol (e.g., ! @ #).",
+        "password-min-one-upper": "Password must contain at least one uppercase letter (e.g., A B C).",
+        "password-min-one-lower": "Password must contain at least one lowercase letter (e.g., a b c)."
       },
       "firstname" : "Firstname",
       "lastname": "Lastname",
