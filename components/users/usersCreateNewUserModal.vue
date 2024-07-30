@@ -7,14 +7,19 @@ import {
   PasswordMustContainsOneLowerCase, PasswordMustContainsOneNumeric,
   PasswordMustContainsOneUpperCase
 } from "~/validators/customvalidations.js";
+import Toast from "~/components/common/Toast.vue";
+import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
+import {storeToRefs} from "pinia";
 
 export default {
+  components: {Toast},
   setup() {
     let {$i18n} = useNuxtApp();
 
     const withI18nMessage = createI18nMessage({t: $i18n.t});
 
     let usersStore = useUsersStore();
+   let websiteStore =  useWebsiteStore();
     let userModel = reactive({
       firstName: '',
       lastName: '',
@@ -52,22 +57,11 @@ export default {
     }
     let v = useVuelidate(rules, userModel);
 
-    return {usersStore, v};
+    return {usersStore, v,websiteStore};
   },
   methods: {
     async CreateNewUser() {
-      let res = await $fetch('http://localhost:5144/admin/users/create', {
-        method: 'POST',
-        body: {
-          firstName: 'Levan',
-          lastName: 'Asanoghli',
-          email: 'Asanoghli123@gmail.com',
-          username: 'asanoghliLevani',
-          password: 'Drakula9X!.',
-        },
-        server: false
-      })
-      console.log(res);
+        this.websiteStore.ShowToast(1,'მომხმარებელი წარმატებით დაემატა');
     }
   },
   computed : {
@@ -76,6 +70,7 @@ export default {
 }
 </script>
 <template>
+  <Toast/>
   <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <!--
       Background backdrop, show/hide based on modal state.
