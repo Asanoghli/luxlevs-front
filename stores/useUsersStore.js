@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 
 export const useUsersStore = defineStore('usersStore', {
     state: () => {
@@ -69,6 +70,21 @@ export const useUsersStore = defineStore('usersStore', {
     actions : {
         ToggleCreateUserModal(){
             this.showCreateNewUserModal = !this.showCreateNewUserModal;
+        },
+        async CreateUser(userModel){
+            console.log(userModel)
+            let response = null;
+            try {
+                response = await $fetch(ADMIN_URLS.USERS.CREATE,{
+                    body : userModel.value,
+                    method:'POST'
+                })
+            }
+            catch{
+
+            }
+
+            return response;
         }
     },
     getters:  {

@@ -10,6 +10,7 @@ import {
 import Toast from "~/components/common/Toast.vue";
 import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
 import {storeToRefs} from "pinia";
+import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 
 export default {
   components: {Toast},
@@ -19,7 +20,7 @@ export default {
     const withI18nMessage = createI18nMessage({t: $i18n.t});
 
     let usersStore = useUsersStore();
-   let websiteStore =  useWebsiteStore();
+    let websiteStore = useWebsiteStore();
     let userModel = reactive({
       firstName: '',
       lastName: '',
@@ -57,16 +58,18 @@ export default {
     }
     let v = useVuelidate(rules, userModel);
 
-    return {usersStore, v,websiteStore};
+    return {usersStore, v, websiteStore, userModel};
   },
   methods: {
     async CreateNewUser() {
-        this.websiteStore.ShowToast(1,'მომხმარებელი წარმატებით დაემატა');
+      if (this.v.$invalid) return;
+
+      let response = await this.usersStore.CreateUser(this.userModel);
+
+      this.websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
     }
   },
-  computed : {
-    
-  }
+  computed: {}
 }
 </script>
 <template>
@@ -98,7 +101,7 @@ export default {
         <div
             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:w-3/4  xl:w-1/3 2xl:w-1/3 3xl:w-1/3 4xl:w-1/4  md:w-2/3 lg:w-1/2">
           <div class="px-6 bg-gray-800 w-full py-6 flex justify-between items-center">
-            <h3 class="text-xl text-gray-400 uppercase">{{$t('admin.users.add-user')}}</h3>
+            <h3 class="text-xl text-gray-400 uppercase">{{ $t('admin.users.add-user') }}</h3>
             <button @click="usersStore.ToggleCreateUserModal">
               <svg xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 48 48">
                 <g fill="none" stroke="#9CA3AF" stroke-linejoin="round" stroke-width="4">
@@ -133,7 +136,8 @@ export default {
               </div> <!--email -->
               <div class="flex items-center justify-start w-full">
                 <label class="w-1/3 text-gray-400" for="">{{ $t('admin.users.password') }}</label>
-                <input v-model.k.lazy="v.password.$model" class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
+                <input v-model.k.lazy="v.password.$model"
+                       class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
               </div> <!--password -->
             </div>
 
