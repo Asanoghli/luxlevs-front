@@ -18,8 +18,7 @@ export default {
     </a>
     <div class="w-full px-2 relative">
       <div class="flex flex-col items-center w-full mt-3 border-t border-gray-700">
-        <nuxt-link active-class="active" class="sidebar-item"
-                   to="/admin/main">
+        <nuxt-link active-class="active" class="sidebar-item"                   to="/admin/main">
           <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
