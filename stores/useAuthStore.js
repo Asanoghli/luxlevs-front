@@ -13,19 +13,26 @@ export const useAuthStore = defineStore('authStore', {
     },
     actions: {
         async Authenticate(authCredentials) {
-            // let config = useRuntimeConfig();
-            let response = await $fetch('http://localhost:5144/auth/login', {
-                body: authCredentials,
-                method: 'POST',
-            });
+            let isAuthenticated = false;
+            try {
+                let response = await $fetch('http://localhost:5144/auth/login', {
+                    body: authCredentials,
+                    method: 'POST',
+                });
 
-            if (response.data) {
-                this.AuthByCookie(response.data.token, response.data.validTo);
+                if (response.data) {
+                    this.AuthByCookie(response.data.token, response.data.validTo);
 
-                return true;
+                    isAuthenticated = true;
+                }
+            }
+            catch
+            {
+                isAuthenticated = false;
             }
 
-            return false;
+
+            return isAuthenticated;
         },
         AuthByCookie(token, validTo) {
             this.token = token;
