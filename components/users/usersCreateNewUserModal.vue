@@ -4,7 +4,8 @@ import {required, minLength, maxLength, createI18nMessage, email, requiredIf} fr
 import {ValidationConstants} from "~/constants/ValidationConstants.js";
 import {
   PasswordMustContainOneCharacter,
-  PasswordMustContainsOneLowerCase, PasswordMustContainsOneNumeric,
+  PasswordMustContainsOneLowerCase,
+  PasswordMustContainsOneNumeric,
   PasswordMustContainsOneUpperCase
 } from "~/validators/customvalidations.js";
 import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
@@ -60,17 +61,12 @@ export default {
       if (this.v.$invalid) return;
 
       let response = await this.usersStore.CreateUser(this.userModel);
-      console.log(response)
-      if(response == null){
-        this.websiteStore.ShowToast(-1,'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
-        return;
-      }
-      if(response.errors){
-        this.websiteStore.ShowToast(-1,response.errors[0].errorMessage);
-        return;
-      }
       if(response.isSuccess){
-        this.websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
+        this.v.$reset();
+        this.userModel.firstName = '';
+        this.userModel.lastName = '';
+        this.userModel.email = '';
+        this.userModel.password = '';
       }
     }
   },

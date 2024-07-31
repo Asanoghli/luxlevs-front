@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 import {AuthConstants} from "~/constants/SessionConstants.js";
+import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
 
 export const useUsersStore = defineStore('usersStore', {
     state: () => {
@@ -73,6 +74,7 @@ export const useUsersStore = defineStore('usersStore', {
             this.showCreateNewUserModal = !this.showCreateNewUserModal;
         },
         async CreateUser(user){
+            let websiteStore = useWebsiteStore();
             let userToken = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
 
             let response = null;
@@ -89,7 +91,19 @@ export const useUsersStore = defineStore('usersStore', {
                 response = null
             }
 
-            return response;
+            if(response == null){
+                websiteStore.ShowToast(-1,'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
+                return {isSuccess : false};
+            }
+            if(response.errors){
+                websiteStore.ShowToast(-1,response.errors[0].errorMessage);
+                return {isSuccess : false};
+            }
+            if(response.isSuccess){
+                websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
+
+                return {userId : response.data.id,isSuccess:true};
+            }
         }
     },
     getters:  {
