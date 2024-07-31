@@ -21,7 +21,7 @@ export  const useWebsiteStore =  defineStore('websiteStore',{
                 this.toastInfo.showToast =false;
                 this.toastInfo.toastMessage ='';
                 this.toastInfo.toastType =1;
-            },2000);
+            },4000);
         }
     }
 })

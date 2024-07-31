@@ -27,10 +27,10 @@ export  default {
 </template>
 <style scoped>
 .fade-enter-active{
- animation: fade 0.8s ease-in-out;
+ animation: fade 1s ease-in-out;
 }
 .fade-leave-active{
-  animation:  fade 0.8s ease-in-out reverse;
+  animation:  fade 2.9s ease-in-out reverse;
 }
 
 @keyframes fade {
