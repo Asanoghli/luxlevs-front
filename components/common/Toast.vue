@@ -11,7 +11,7 @@ export default {
     <div class="flex flex-col items-center w-96 top-4 left-4 h-fit bg-gray-900 absolute z-20 rounded transition-all"
          v-if="toastInfo.showToast">
       <div class="w-full h-fit flex justify-center py-2 bg-gray-800">
-        <h3 class="text-xl" :class="toastInfo.toastType > 0 ? 'text-green-600' : 'text-red-500'">შეტყობინება</h3>
+        <h3 class="text-xl" :class="toastInfo.toastType > 0 ? 'text-green-600' : 'text-red-500'">{{ $t('general.notification') }}</h3>
       </div>
       <div class="flex gap-2 items-center h-full w-full px-2 py-3">
         <div class="icon flex justify-start items-center">

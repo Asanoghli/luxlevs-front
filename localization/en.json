@@ -59,7 +59,9 @@
     "delete": "Delete",
     "edit": "Edit",
     "search": "Search",
-    "close": "Close"
+    "close": "Close",
+    "notification": "Notification"
+
 
   }
 }
