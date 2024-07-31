@@ -65,11 +65,13 @@ export default {
         this.websiteStore.ShowToast(-1,'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
         return;
       }
-      if(response.errors.length > 0){
-        console.log(response.errors[0].errorMessage)
+      if(response.errors){
         this.websiteStore.ShowToast(-1,response.errors[0].errorMessage);
+        return;
       }
-      this.websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
+      if(response.isSuccess){
+        this.websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
+      }
     }
   },
   computed: {}
