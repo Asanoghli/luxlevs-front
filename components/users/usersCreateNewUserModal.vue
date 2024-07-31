@@ -1,8 +1,9 @@
 <script>
 import useVuelidate from "@vuelidate/core";
-import {required, minLength, maxLength, createI18nMessage, email, requiredIf} from '@vuelidate/validators'
+import {required, minLength, maxLength, createI18nMessage, email, requiredIf, helpers} from '@vuelidate/validators'
 import {ValidationConstants} from "~/constants/ValidationConstants.js";
 import {
+  CheckEmailIfExists,
   PasswordMustContainOneCharacter,
   PasswordMustContainsOneLowerCase,
   PasswordMustContainsOneNumeric,
@@ -16,6 +17,7 @@ export default {
   setup() {
     let {$i18n} = useNuxtApp();
     let isLoading = ref(false)
+    let existedEmailUserId = ref('');
 
     const withI18nMessage = createI18nMessage({t: $i18n.t});
 
@@ -42,7 +44,16 @@ export default {
         required: withI18nMessage(required, {messagePath: _ => 'admin.users.create.email-required'}),
         invalidEmail: withI18nMessage(email, {messagePath: _ => 'admin.users.create.email-invalid'}),
         minLength: withI18nMessage(minLength(ValidationConstants.ADMIN.EMAIL_MIN_LENGTH), {messagePath: () => 'admin.users.create.email-minlength'}),
-        maxLength: withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH), {messagePath: () => 'admin.users.create.email-maxlength'})
+        maxLength: withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH), {messagePath: () => 'admin.users.create.email-maxlength'}),
+        isEmailExists : helpers.withAsync( async (value)=>{
+          let response =await  CheckEmailIfExists(value);
+          console.log(response)
+          if(response.isExists){
+            existedEmailUserId.value = response.userId;
+            return false;
+          }
+          else return true;
+        },'World')
       },
       password: {
         required: withI18nMessage(required, {messagePath: _ => 'admin.users.create.password-required'}),
