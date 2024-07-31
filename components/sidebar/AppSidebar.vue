@@ -2,9 +2,10 @@
 import AppSidebarClosed from "~/components/sidebar/AppSidebarClosed.vue";
 import AppSidebarOpened from "~/components/sidebar/AppSidebarOpened.vue";
 import {SidebarConstants} from "~/constants/SessionConstants.js";
+import Toast from "~/components/common/Toast.vue";
 
 export default {
-  components: {AppSidebarOpened, AppSidebarClosed},
+  components: {Toast, AppSidebarOpened, AppSidebarClosed},
   setup() {
     let sidebarState = useAppSidebar();
 
@@ -26,6 +27,7 @@ export default {
 }
 </script>
 <template>
+  <Toast/>
   <app-sidebar-opened v-show="sidebarState.isSidebarOpen"/>
   <app-sidebar-closed v-show="!sidebarState.isSidebarOpen"/>
 </template>

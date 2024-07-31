@@ -7,13 +7,9 @@ import {
   PasswordMustContainsOneLowerCase, PasswordMustContainsOneNumeric,
   PasswordMustContainsOneUpperCase
 } from "~/validators/customvalidations.js";
-import Toast from "~/components/common/Toast.vue";
 import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
-import {storeToRefs} from "pinia";
-import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 
 export default {
-  components: {Toast},
   setup() {
     let {$i18n} = useNuxtApp();
 
@@ -25,7 +21,6 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      birthDate: '',
       password: ''
     });
     let rules = {
@@ -65,7 +60,15 @@ export default {
       if (this.v.$invalid) return;
 
       let response = await this.usersStore.CreateUser(this.userModel);
-
+      console.log(response)
+      if(response == null){
+        this.websiteStore.ShowToast(-1,'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
+        return;
+      }
+      if(response.errors.length > 0){
+        console.log(response.errors[0].errorMessage)
+        this.websiteStore.ShowToast(-1,response.errors[0].errorMessage);
+      }
       this.websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
     }
   },
@@ -73,7 +76,6 @@ export default {
 }
 </script>
 <template>
-  <Toast/>
   <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <!--
       Background backdrop, show/hide based on modal state.

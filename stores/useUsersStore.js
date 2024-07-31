@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
+import {AuthConstants} from "~/constants/SessionConstants.js";
 
 export const useUsersStore = defineStore('usersStore', {
     state: () => {
@@ -71,17 +72,21 @@ export const useUsersStore = defineStore('usersStore', {
         ToggleCreateUserModal(){
             this.showCreateNewUserModal = !this.showCreateNewUserModal;
         },
-        async CreateUser(userModel){
-            console.log(userModel)
+        async CreateUser(user){
+            let userToken = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
+
             let response = null;
             try {
                 response = await $fetch(ADMIN_URLS.USERS.CREATE,{
-                    body : userModel.value,
-                    method:'POST'
+                    body : user,
+                    method:'POST',
+                    headers : {
+                        'Authorization': 'Bearer ' + userToken.value
+                    }
                 })
             }
             catch{
-
+                response = null
             }
 
             return response;
