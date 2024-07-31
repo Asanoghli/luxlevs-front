@@ -9,10 +9,13 @@ import {
   PasswordMustContainsOneUpperCase
 } from "~/validators/customvalidations.js";
 import {useWebsiteStore} from "~/stores/appWebsiteStore.js";
+import LoadingDots from "~/components/buttonIcons/loadingDots.vue";
 
 export default {
+  components: {LoadingDots},
   setup() {
     let {$i18n} = useNuxtApp();
+    let isLoading = ref(false)
 
     const withI18nMessage = createI18nMessage({t: $i18n.t});
 
@@ -54,20 +57,21 @@ export default {
     }
     let v = useVuelidate(rules, userModel);
 
-    return {usersStore, v, websiteStore, userModel};
+    return {usersStore, v, websiteStore, userModel, isLoading};
   },
   methods: {
     async CreateNewUser() {
-      if (this.v.$invalid) return;
-
+      if (this.v.$invalid || this.isLoading) return;
+      this.isLoading = true;
       let response = await this.usersStore.CreateUser(this.userModel);
-      if(response.isSuccess){
+      if (response.isSuccess) {
         this.v.$reset();
         this.userModel.firstName = '';
         this.userModel.lastName = '';
         this.userModel.email = '';
         this.userModel.password = '';
       }
+      this.isLoading = false;
     }
   },
   computed: {}
@@ -144,12 +148,16 @@ export default {
           </div>
           <div class="bg-gray-800 px-4 py-3 flex flex-row gap-3">
             <button @click="usersStore.ToggleCreateUserModal" type="button"
-                    class="w-full justify-center rounded bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 ">
+                    class="w-full size-12 flex justify-center items-center  rounded bg-red-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-red-700 ">
               {{ $t('general.close') }}
             </button>
             <button @click="CreateNewUser" type="button"
-                    class="w-full justify-center rounded bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 ">
-              {{ $t('general.add') }}
+                    class="w-full size-12 flex justify-center items-center rounded bg-blue-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-blue-500 ">
+              <span v-show="!isLoading">
+                {{ $t('general.add') }}
+              </span>
+              <loading-dots v-show="isLoading" class="size-8"/>
+
             </button>
           </div>
         </div>

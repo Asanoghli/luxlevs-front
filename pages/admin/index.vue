@@ -3,8 +3,10 @@
 import {required, helpers} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {SidebarConstants} from "~/constants/SessionConstants.js";
+import LoadingDots from "~/components/buttonIcons/loadingDots.vue";
 
 export default {
+  components: {LoadingDots},
   setup() {
     definePageMeta({
       layout: false,
@@ -94,7 +96,7 @@ export default {
             <span v-show="isPasswordInvalid" class="text-red-500">{{ $t('admin.login.incorrect-username-or-password') }}</span>
           </div>
           <button  @click.prevent="SignIn" class="btn-login ">
-            <svg v-show="isLoading" xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 24 24"><circle cx="4" cy="12" r="3" fill="currentColor"><animate id="svgSpinners3DotsFade0" fill="freeze" attributeName="opacity" begin="0;svgSpinners3DotsFade1.end-0.375s" dur="1.125s" values="1;0.2"/></circle><circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.4"><animate fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.225s" dur="1.125s" values="1;0.2"/></circle><circle cx="20" cy="12" r="3" fill="currentColor" opacity="0.3"><animate id="svgSpinners3DotsFade1" fill="freeze" attributeName="opacity" begin="svgSpinners3DotsFade0.begin+0.45s" dur="1.125s" values="1;0.2"/></circle></svg>
+            <loading-dots v-show="isLoading"/>
             <span v-show="!isLoading" class="btn-login-text">{{ $t('admin.login.btn-login') }}</span>
           </button>
         </form>
