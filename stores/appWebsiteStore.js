@@ -4,9 +4,9 @@ export  const useWebsiteStore =  defineStore('websiteStore',{
     state(){
         return {
             toastInfo : reactive({
-                showToast : true,
+                showToast : false,
                 toastMessage : '',
-                toastType : -1
+                toastType : 1
             })
         }
     },
