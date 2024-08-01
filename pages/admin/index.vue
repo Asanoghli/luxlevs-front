@@ -89,14 +89,15 @@ export default {
           </div>
           <div class="flex flex-col  w-full gap-3">
             <input v-model.lazy="v.password.$model"
-                   class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300" type="text"
+                   class="focus:outline-0 p-3 rounded bg-gray-900 text-gray-300" type="password"
+
                    :class="[GetInvalidClassesIfDirtyAndInvalidPassword, GetValidClassesIfDirtyAndValidPassword]"
                    :placeholder="$t('admin.login.input-password-placeholder')">
             <span v-show="v.password.$error" class="text-red-500">{{$t('admin.login.password-is-required')}}</span>
             <span v-show="isPasswordInvalid" class="text-red-500">{{ $t('admin.login.incorrect-username-or-password') }}</span>
           </div>
           <button  @click.prevent="SignIn" class="btn-login ">
-            <loading-dots v-show="isLoading"/>
+            <loading-dots v-show="isLoading" class="size-8"/>
             <span v-show="!isLoading" class="btn-login-text">{{ $t('admin.login.btn-login') }}</span>
           </button>
         </form>
@@ -140,7 +141,7 @@ export default {
 }
 
 .btn-login{
-  @apply w-full bg-blue-600 rounded p-3 hover:bg-blue-500  flex justify-center items-center gap-3 mt-6;
+  @apply w-full bg-blue-600 rounded py-3 hover:bg-blue-500 h-14  flex justify-center items-center gap-3 mt-6;
 }
 .btn-login-text{
   @apply text-white text-xl;
