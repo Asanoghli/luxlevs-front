@@ -45,15 +45,16 @@ export default {
         invalidEmail: withI18nMessage(email, {messagePath: _ => 'admin.users.create.email-invalid'}),
         minLength: withI18nMessage(minLength(ValidationConstants.ADMIN.EMAIL_MIN_LENGTH), {messagePath: () => 'admin.users.create.email-minlength'}),
         maxLength: withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH), {messagePath: () => 'admin.users.create.email-maxlength'}),
-        isEmailExists : helpers.withAsync( async (value)=>{
+        isEmailExists : withI18nMessage(helpers.withAsync( async (value)=>{
           let response =await  CheckEmailIfExists(value);
           console.log(response)
-          if(response.isExists){
-            existedEmailUserId.value = response.userId;
+          if(response.data.isExists){
+            existedEmailUserId.value = response.data.userId;
+            alert(existedEmailUserId.value)
             return false;
           }
           else return true;
-        },'World')
+        }),{messagePath : ()=> 'admin.users.create.email-unique'}),
       },
       password: {
         required: withI18nMessage(required, {messagePath: _ => 'admin.users.create.password-required'}),
@@ -83,6 +84,11 @@ export default {
         this.userModel.password = '';
       }
       this.isLoading = false;
+    },
+    CheckEmail(){
+      this.v.email.$touch();
+      let isValid = !this.v.email.$error;
+      if(isValid)  this.v.email.$params.isEmailExists();
     }
   },
   computed: {}
@@ -129,7 +135,9 @@ export default {
           <div class="bg-gray-900 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
             <div v-show="v.$errors.length > 0" class="h-auto bg-gray-800 mb-5 p-5 rounded">
               <ul class="list-disc w-full marker:m-0 marker:p-0 list-inside m-0 p-0">
-                <li class="text-red-500 p-1 " v-for="error in v.$errors">{{ error.$message }}</li>
+                <li class="text-red-500 p-1 " v-for="error in v.$errors" v-html="error.$message">
+
+                </li>
               </ul>
             </div>
 
@@ -146,7 +154,7 @@ export default {
               </div> <!--lastname -->
               <div class="flex items-center justify-start w-full">
                 <label class="w-1/3 text-gray-400" for="">{{ $t('admin.users.email') }}</label>
-                <input v-model.lazy="v.email.$model"
+                <input @focusout="CheckEmail" v-model.lazy="userModel.email"
                        class="p-2 bg-gray-600 text-gray-300   rounded w-auto grow  focus:outline-0" type="text">
               </div> <!--email -->
               <div class="flex items-center justify-start w-full">
