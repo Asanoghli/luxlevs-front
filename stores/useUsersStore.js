@@ -28,42 +28,7 @@ export const useUsersStore = defineStore('usersStore', {
                 {
                     id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
                 },
-                {
-                    id: 2, firstName: 'Sandro', lastName: 'Zangurashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
-                },
-                {
-                    id: 2, firstName: 'Sandro', lastName: 'Zangurashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
-                },
-                {
-                    id: 2, firstName: 'Sandro', lastName: 'Zangurashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
-                },
-                {
-                    id: 2, firstName: 'Sandro', lastName: 'Zangurashvili', checked: false
-                },
-                {
-                    id: 1, firstName: 'Giorgi', lastName: 'Zubashvili', checked: false
-                },
+
 
             ]),
             showCreateNewUserModal : false

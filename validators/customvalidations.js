@@ -3,6 +3,7 @@ import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 import {AuthConstants} from "~/constants/SessionConstants.js";
 
 export const PasswordMustContainOneCharacter = function (value){
+    console.log('Checking Character...')
     if (!ValidationConstants.ADMIN.PASSWORD_MUST_CONTAINS_ONE_CHARACTER) return true;
 
     return /[^a-zA-Z0-9]/g.test(value);

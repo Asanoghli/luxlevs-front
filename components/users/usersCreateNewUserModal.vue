@@ -47,10 +47,8 @@ export default {
         maxLength: withI18nMessage(maxLength(ValidationConstants.ADMIN.EMAIL_MAX_LENGTH), {messagePath: () => 'admin.users.create.email-maxlength'}),
         isEmailExists : withI18nMessage(helpers.withAsync( async (value)=>{
           let response =await  CheckEmailIfExists(value);
-          console.log(response)
           if(response.data.isExists){
             existedEmailUserId.value = response.data.userId;
-            alert(existedEmailUserId.value)
             return false;
           }
           else return true;

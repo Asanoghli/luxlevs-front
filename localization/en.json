@@ -33,7 +33,7 @@
         "email-invalid": "Invalid Email address",
         "email-minlength": "Email must be at least {min} characters long",
         "email-maxlength": "Email must be at most {min} characters long",
-        "email-unique": "Email <b class=\"text-blue-500\">{model}</b> already busy",
+        "email-unique": "Email <b>{model}</b> already busy",
 
         "password-required": "Password is required.",
         "password-minlength": "Password must be at least {min} characters long.",

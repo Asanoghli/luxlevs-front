@@ -2,9 +2,10 @@
 
 import UsersTableSearchBar from "~/components/users/usersTableSearchBar.vue";
 import UsersCreateNewUserModal from "~/components/users/usersCreateNewUserModal.vue";
+import Pagination from "~/components/common/Pagination.vue";
 
 export default {
-  components: {UsersCreateNewUserModal, UsersTableSearchBar},
+  components: {Pagination, UsersCreateNewUserModal, UsersTableSearchBar},
   setup() {
     let usersStore = useUsersStore();
     definePageMeta({
@@ -24,6 +25,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
+      <pagination page-count="10"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>
