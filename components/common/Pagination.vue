@@ -11,19 +11,23 @@ export  default {
     pageCount : {
       type : Number,
       required : true
+    },
+    goToPath : {
+      type : String,
+      required : true
     }
   },
   methods : {
     async GoToPage(e,newPage){
       if(newPage ===1){
         await this.router.push({
-          path : "/admin/users"
+          path : this.goToPath
         })
       }
       else{
         await this.router.push({
           query : {page: newPage},
-          path : "/admin/users"
+          path : this.goToPath
         })
       }
     }

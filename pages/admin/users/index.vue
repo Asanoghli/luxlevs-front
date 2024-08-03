@@ -19,7 +19,7 @@ export default {
       ]
     })
 
-    return {usersStore}
+    return {usersStore,pages : response.pagesCount}
   },
   watch : {
     "$route.query.page": function (to, from) {
@@ -34,7 +34,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
-      <pagination :page-count="10"/>
+      <pagination go-to-path="/admin/users" :page-count="pages"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>

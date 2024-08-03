@@ -69,7 +69,7 @@ export const useUsersStore = defineStore('usersStore', {
         },
           async FetchUsers(pageNumber) {
             let cookie = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
-            let usersResponse =  await useFetch(ADMIN_URLS.USERS.ALL_LIST, {
+            let {data} =  await useFetch(ADMIN_URLS.USERS.ALL_LIST, {
                 query: {
                     pageNumber: pageNumber
                 },
@@ -77,9 +77,9 @@ export const useUsersStore = defineStore('usersStore', {
                     "Authorization": "Bearer " + cookie.value
                 }
             })
-             this.users    = usersResponse.data.value.dataList;
+             this.users    = data.value.dataList;
 
-            return usersResponse;
+            return data.value;
         }
     },
     getters: {
