@@ -3,11 +3,15 @@
 import UsersTableSearchBar from "~/components/users/usersTableSearchBar.vue";
 import UsersCreateNewUserModal from "~/components/users/usersCreateNewUserModal.vue";
 import Pagination from "~/components/common/Pagination.vue";
+import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 
 export default {
   components: {Pagination, UsersCreateNewUserModal, UsersTableSearchBar},
-  setup() {
+  async setup() {
+    let route = useRoute();
+    let pageNumber = route.query.page ? route.query.page : 1;
     let usersStore = useUsersStore();
+    let response  = await usersStore.FetchUsers(pageNumber);
     definePageMeta({
       layout: 'admin-layout',
       middleware: [
@@ -17,7 +21,12 @@ export default {
 
     return {usersStore}
   },
-
+  watch : {
+    "$route.query.page": function (to, from) {
+      let pageNumber = to === undefined ? 1 : to
+      this.usersStore.FetchUsers(pageNumber);
+    }
+  }
 }
 </script>
 <template>
@@ -25,7 +34,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
-      <pagination page-count="10"/>
+      <pagination :page-count="10"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>

@@ -27,51 +27,62 @@ export const useUsersStore = defineStore('usersStore', {
                 },
                 {
                     id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
-                },
-
-
+                }
             ]),
-            showCreateNewUserModal : false
+            showCreateNewUserModal: false
         }
     },
-    actions : {
-        ToggleCreateUserModal(){
+    actions: {
+        ToggleCreateUserModal() {
             this.showCreateNewUserModal = !this.showCreateNewUserModal;
         },
-        async CreateUser(user){
+        async CreateUser(user) {
             let websiteStore = useWebsiteStore();
             let userToken = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
 
             let response = null;
             try {
-                response = await $fetch(ADMIN_URLS.USERS.CREATE,{
-                    body : user,
-                    method:'POST',
-                    headers : {
+                response = await $fetch(ADMIN_URLS.USERS.CREATE, {
+                    body: user,
+                    method: 'POST',
+                    headers: {
                         'Authorization': 'Bearer ' + userToken.value
                     }
                 })
-            }
-            catch{
+            } catch {
                 response = null
             }
 
-            if(response == null){
-                websiteStore.ShowToast(-1,'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
-                return {isSuccess : false};
+            if (response == null) {
+                websiteStore.ShowToast(-1, 'მომხმარებლის დამატების დროს მოხდა შეცდომა.')
+                return {isSuccess: false};
             }
-            if(response.errors){
-                websiteStore.ShowToast(-1,response.errors[0].errorMessage);
-                return {isSuccess : false};
+            if (response.errors) {
+                websiteStore.ShowToast(-1, response.errors[0].errorMessage);
+                return {isSuccess: false};
             }
-            if(response.isSuccess){
+            if (response.isSuccess) {
                 websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
 
-                return {userId : response.data.id,isSuccess:true};
+                return {userId: response.data.id, isSuccess: true};
             }
+        },
+          async FetchUsers(pageNumber) {
+            let cookie = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
+            let usersResponse =  await useFetch(ADMIN_URLS.USERS.ALL_LIST, {
+                query: {
+                    pageNumber: pageNumber
+                },
+                headers: {
+                    "Authorization": "Bearer " + cookie.value
+                }
+            })
+             this.users    = usersResponse.data.value.dataList;
+
+            return usersResponse;
         }
     },
-    getters:  {
+    getters: {
         GetIsEveryUserChecked() {
             return this.users.every(user => user.checked);
         },
