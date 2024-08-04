@@ -8,10 +8,29 @@ import {ADMIN_URLS} from "~/constants/WebApiUrlsConstants.js";
 export default {
   components: {Pagination, UsersCreateNewUserModal, UsersTableSearchBar},
   async setup() {
-    let route = useRoute();
-    let pageNumber = ref(route.query.page ? route.query.page : 1);
     let usersStore = useUsersStore();
-    let response  = await usersStore.FetchUsers(pageNumber);
+    let route = useRoute();
+    let router = useRouter();
+    let queryPage = route.query.page;
+    let currentPage = ref(1);
+    if(queryPage && queryPage >0){
+      currentPage = queryPage;
+    }
+    else{
+     await router.push({
+        path : '/admin/users'
+      })
+    }
+    currentPage = ref(route.query.page && route.query.page > 0 ? route.query.page : 1);
+    let response  = await usersStore.FetchUsers(currentPage);
+    let totalPagesCount = response.pagesCount;
+    let totalRowsCount = response.rowCount;
+    if(currentPage.value <1 || currentPage > totalPagesCount){
+      await router.push({
+        path : '/admin/users',
+        query : {}
+      });
+    }
 
     definePageMeta({
       layout: 'admin-layout',
@@ -20,11 +39,20 @@ export default {
       ]
     })
 
-    return {usersStore,pages : response.pagesCount,rows : response.rowCount,pageNumber : pageNumber}
+    return {usersStore,totalPagesCount,totalRowsCount,currentPage,router,route}
   },
   watch : {
-    pageNumber : function (to,from){
+    currentPage : function (to,from){
       let pageNumber = to === undefined ? 1 : to
+
+        if(pageNumber === 1) this.router.push({
+           query:{},
+          path : '/admin/users'
+        })
+      else  this.router.push({
+          query:{page : pageNumber},
+          path : '/admin/users'
+        })
       this.usersStore.FetchUsers(pageNumber);
     }
   }
@@ -35,7 +63,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
-      <pagination v-model="pageNumber"  :page-count="pages" :rows-count="rows"/>
+      <pagination  v-model="currentPage"  :page-count="totalPagesCount" :rows-count="totalRowsCount"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>

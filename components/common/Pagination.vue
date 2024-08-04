@@ -14,24 +14,10 @@ export default {
       required: true
     }
   },
-  methods: {
-    async GoToPage(e, newPage) {
-      if (newPage === 1) {
-        await this.router.push({
-          path: this.goToPath
-        })
-      } else {
-        await this.router.push({
-          query: {page: newPage},
-          path: this.goToPath
-        })
-      }
-    }
-  },
 }
 </script>
 <template>
-  <UPagination page-count="3" :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}"
+  <UPagination page-count="10" :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}"
                :ui="{wrapper:'pagination-wrapper'}" :model-value="currentModel" :total="rowsCount"  />
 </template>
 <style>
