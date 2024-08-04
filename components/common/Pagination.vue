@@ -1,60 +1,49 @@
 <script>
-export  default {
-  setup(){
-    let route = useRoute();
-    let router = useRouter();
-    let currentPage = parseInt(route.query.page);
-    console.log(currentPage)
-    return {currentPage,router,route}
+export default {
+  setup() {
+    let currentModel = defineModel();
+    return {currentModel}
   },
-  props : {
-    pageCount : {
-      type : Number,
-      required : true
+  props: {
+    pageCount: {
+      type: Number,
+      required: true
     },
-    goToPath : {
-      type : String,
-      required : true
+    rowsCount: {
+      type: Number,
+      required: true
     }
   },
-  methods : {
-    async GoToPage(e,newPage){
-      if(newPage ===1){
+  methods: {
+    async GoToPage(e, newPage) {
+      if (newPage === 1) {
         await this.router.push({
-          path : this.goToPath
+          path: this.goToPath
         })
-      }
-      else{
+      } else {
         await this.router.push({
-          query : {page: newPage},
-          path : this.goToPath
+          query: {page: newPage},
+          path: this.goToPath
         })
       }
     }
   },
-  computed :{
-    getCurrentPage(){
-      let currentPageInt =  this.route.query.page === undefined ? 1 :parseInt(this.route.query.page);
-
-      return currentPageInt
-    },
-    getIsMoreThanEight(){
-      return this.pageCount > 10;
-    },
-    getFirstThreePage(){
-
-    }
-  }
 }
 </script>
 <template>
-  <UPagination  :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}" :ui="{wrapper:'pagination-wrapper'}"  :model-value="1" :total="100" show-last show-first />
+  <UPagination page-count="3" :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}"
+               :ui="{wrapper:'pagination-wrapper'}" :model-value="currentModel" :total="rowsCount"  />
 </template>
 <style>
-.pagination-wrapper > .pagination-active-btn{
-  border-radius: 50%;
+.pagination-wrapper {
+  @apply gap-x-1 w-full;
 }
-.pagination-wrapper > .pagination-inactive-btn{
-  border-radius: 50% !important;
+
+.pagination-wrapper > .pagination-active-btn {
+  @apply rounded-md h-8 text-xl text-gray-300 bg-gray-700;
+}
+
+.pagination-wrapper > .pagination-inactive-btn {
+  @apply rounded-md h-8 text-xl text-gray-500;
 }
 </style>

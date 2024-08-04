@@ -9,9 +9,10 @@ export default {
   components: {Pagination, UsersCreateNewUserModal, UsersTableSearchBar},
   async setup() {
     let route = useRoute();
-    let pageNumber = route.query.page ? route.query.page : 1;
+    let pageNumber = ref(route.query.page ? route.query.page : 1);
     let usersStore = useUsersStore();
     let response  = await usersStore.FetchUsers(pageNumber);
+
     definePageMeta({
       layout: 'admin-layout',
       middleware: [
@@ -19,10 +20,10 @@ export default {
       ]
     })
 
-    return {usersStore,pages : response.pagesCount}
+    return {usersStore,pages : response.pagesCount,rows : response.rowCount,pageNumber : pageNumber}
   },
   watch : {
-    "$route.query.page": function (to, from) {
+    pageNumber : function (to,from){
       let pageNumber = to === undefined ? 1 : to
       this.usersStore.FetchUsers(pageNumber);
     }
@@ -34,7 +35,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
-      <pagination go-to-path="/admin/users" :page-count="pages"/>
+      <pagination v-model="pageNumber"  :page-count="pages" :rows-count="rows"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>
