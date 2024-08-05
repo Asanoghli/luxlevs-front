@@ -3,15 +3,14 @@ export default {
   setup(){
     let usersStore = useUsersStore();
     return{usersStore}
-  },
-
+  }
 }
 </script>
 <template>
   <tbody class="bg-white divide-y divide-gray-200 overflow-hidden">
-  <tr class="h-14 overflow-hidden" v-for="user in usersStore.users" :key="user.id" :class="user.checked ? 'bg-gray-300' : null">
+  <tr class="h-14 overflow-hidden hover:cursor-pointer" v-for="user in usersStore.users" :key="user.checked" @click="user.checked = !user.checked" :class="user.checked ? 'bg-gray-300' : null">
     <td class="px-6 whitespace-nowrap">
-      <label @click="user.checked = !user.checked">
+      <label @click.stop="user.checked = !user.checked">
         <svg v-show="user.checked" xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 32 32">
           <path fill="gray"
                 d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M6 26V6h20v20Z"/>
