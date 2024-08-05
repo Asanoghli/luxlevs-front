@@ -18,7 +18,7 @@ export default {
 </script>
 <template>
   <UPagination
-               :page-count="2"
+               :page-count="15"
                :next-button="{class: 'relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 '}"
                :prev-button="{class:'relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 '}"
                :active-button="{class:'pagination-active-btn', color:'bg-gray-700', size:'md'}"

@@ -65,10 +65,11 @@ export const useUsersStore = defineStore('usersStore', {
             if (response.isSuccess) {
                 websiteStore.ShowToast(1, 'მომხმარებელი წარმატებით დაემატა');
 
+                this.users.push(Object.assign({},{...user, id:response.data.id}))
                 return {userId: response.data.id, isSuccess: true};
             }
         },
-          async FetchUsers(pageNumber) {
+        async FetchUsers(pageNumber) {
             let cookie = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
             let {data} =  await useFetch(ADMIN_URLS.USERS.ALL_LIST, {
                 query: {
