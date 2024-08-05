@@ -30,7 +30,7 @@ export const useUsersStore = defineStore('usersStore', {
                 }
             ]),
             showCreateNewUserModal: false,
-            pageSize : 20
+            pageSize : 2
         }
     },
     actions: {

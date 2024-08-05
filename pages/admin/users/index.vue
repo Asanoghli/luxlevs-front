@@ -14,14 +14,13 @@ export default {
     let queryPage = route.query.page;
     let currentPage = ref(1);
     if(queryPage && queryPage >0){
-      currentPage = queryPage;
+      currentPage.value = parseInt(queryPage);
     }
     else{
      await router.push({
         path : '/admin/users'
       })
     }
-    currentPage = ref(route.query.page && route.query.page > 0 ? route.query.page : 1);
     let response  = await usersStore.FetchUsers(currentPage);
     let totalPagesCount = response.pagesCount;
     let totalRowsCount = response.rowCount;
@@ -38,7 +37,7 @@ export default {
           'auth-middleware'
       ]
     })
-
+console.log(currentPage.value)
     return {usersStore,totalPagesCount,totalRowsCount,currentPage,router,route}
   },
   watch : {
@@ -63,7 +62,7 @@ export default {
     <users-table-search-bar/>
     <div class="w-full overflow-x-hidden">
       <users-table-component/>
-      <pagination  v-model="currentPage"  :page-count="totalPagesCount" :rows-count="totalRowsCount"/>
+      <pagination class="flex items-center justify-end"  v-model="currentPage"  :page-count="totalPagesCount" :rows-count="totalRowsCount"/>
     </div>
   </div>
 <users-create-new-user-modal v-show="usersStore.showCreateNewUserModal"/>
