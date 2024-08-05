@@ -17,7 +17,7 @@ export default {
 }
 </script>
 <template>
-  <UPagination page-count="10" :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}"
+  <UPagination page-count="20" :active-button="{class:'pagination-active-btn'}" :inactive-button="{class:'pagination-inactive-btn'}"
                :ui="{wrapper:'pagination-wrapper'}" :model-value="currentModel" :total="rowsCount"  />
 </template>
 <style>

@@ -29,7 +29,8 @@ export const useUsersStore = defineStore('usersStore', {
                     id: 1, firstName: 'Levan', lastName: 'Asanoghli', checked: false
                 }
             ]),
-            showCreateNewUserModal: false
+            showCreateNewUserModal: false,
+            pageSize : 20
         }
     },
     actions: {
@@ -71,7 +72,8 @@ export const useUsersStore = defineStore('usersStore', {
             let cookie = useCreateNullValuePersistenceCookieOrGetExisted(AuthConstants.USER_TOKEN);
             let {data} =  await useFetch(ADMIN_URLS.USERS.ALL_LIST, {
                 query: {
-                    pageNumber: pageNumber
+                    pageNumber: pageNumber,
+                    pageSize : this.pageSize
                 },
                 headers: {
                     "Authorization": "Bearer " + cookie.value
