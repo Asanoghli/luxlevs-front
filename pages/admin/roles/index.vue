@@ -34,42 +34,48 @@ export default {
         sortable: true,
       },
     ]
-    const people = [{
+    const people = [
+        {
       id: 1,
       name: 'Lindsay Walton',
       title: 'Front-end Developer',
       email: 'lindsay.walton@example.com',
       completed: true,
       role: 'Member'
-    }, {
+    },
+      {
       id: 2,
       name: 'Courtney Henry',
       title: 'Designer',
       email: 'courtney.henry@example.com',
       completed: false,
       role: 'Admin'
-    }, {
+    },
+      {
       id: 3,
       name: 'Tom Cook',
       title: 'Director of Product',
       email: 'tom.cook@example.com',
       completed: true,
       role: 'Member'
-    }, {
+    },
+      {
       id: 4,
       name: 'Whitney Francis',
       title: 'Copywriter',
       email: 'whitney.francis@example.com',
       completed: true,
       role: 'Admin'
-    }, {
+    },
+      {
       id: 5,
       name: 'Leonard Krasner',
       title: 'Senior Designer',
       email: 'leonard.krasner@example.com',
       completed: false,
       role: 'Owner'
-    }, {
+    },
+      {
       id: 6,
       name: 'Floyd Miles',
       title: 'Principal Designer',
@@ -78,8 +84,11 @@ export default {
       role: 'Member'
     }]
     const selected = ref([people[1]])
+    const sort = ref({
 
-    return {people, selected, columns}
+    })
+
+    return {people, selected, columns,sort}
   },
   methods: {
     ShowId(e, id) {
@@ -87,6 +96,16 @@ export default {
     },
     OnSortClicked() {
       alert('World');
+    },
+    IsRowClicked(row){
+      let existedIndexId = this.selected.findIndex(item=>item.id === row.id)
+      if(existedIndexId >= 0) this.selected.splice(existedIndexId, 1)
+      else this.selected.push(row)
+    }
+  },
+  watch : {
+    sort : function (to,from){
+      console.log(to)
     }
   }
 }
@@ -97,10 +116,12 @@ export default {
       class="w-full"
       v-model="selected"
       :rows="people"
+      @select="IsRowClicked"
+      sort-mode="manual"
+      v-model:sort="sort"
       :columns="columns"
-      :sort="OnSortClicked"
       :ui="{
-        tr:{selected : 'bg-gray-200',},
+        tr:{selected : 'bg-green-200 hover:bg-green-200', base:'hover:bg-green-200' ,},
        default : {
         checkbox : {
             ui:{
