@@ -85,7 +85,8 @@ export default {
     }]
     const selected = ref([people[1]])
     const sort = ref({
-
+    column : 'name',
+      direction: 'asc'
     })
 
     return {people, selected, columns,sort}
