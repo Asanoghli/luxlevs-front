@@ -17,6 +17,7 @@
     "@vuelidate/validators": "^2.0.4",
     "nuxt": "^3.12.4",
     "pinia": "^2.1.7",
+    "primevue": "^4.0.4",
     "vue": "latest"
   },
   "overrides": {
